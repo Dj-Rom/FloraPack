@@ -1,1 +1,1 @@
-if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/packaging-manager/sw.js', { scope: '/packaging-manager/' })})}
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/FloraPack/sw.js', { scope: '/FloraPack/' })})}
