@@ -4,7 +4,7 @@ interface Props {
   
   export default function ModalWindowForNameCompany({ onSubmit }: Props) {
     return (
-      <form onSubmit={onSubmit}>
+      <form className="modalForm" onSubmit={onSubmit}>
         <label htmlFor="nameCompany">Wpisz tutaj nazwę listy</label>
         <input type="text" name="nameCompany" id="nameCompany" />
         <button type="submit">Zapisz</button>

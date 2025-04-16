@@ -3,9 +3,9 @@ import './App.css';
 import PackagingList from './components/PackagingList.tsx';
 import FormForListPackaging from './components/FormForListPackaging.tsx';
 import { type InitialList } from './components/FormForListPackaging.tsx';
-import IndexedDBManager from './indexedDB.tsx';
+import IndexedDBManager from './classes/indexedDB.tsx';
 import ModalWindowForNameCompany from './components/ModalWindowForNameCompany.tsx';
-
+import logo_url from "./assets/logo.png"
 export interface PackagingListInterface {
   id: number;
   title: Date;
@@ -19,7 +19,6 @@ function App() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [nameCompanyForList, setNameCompanyForList] = useState('');
   const [tempListData, setTempListData] = useState<InitialList | null>(null);
-
   const fetchAllItems = async () => {
     const items = await indexedDB.getAllItems();
     setPackagingLists(items);
@@ -27,7 +26,7 @@ function App() {
 
   useEffect(() => {
     fetchAllItems();
-  }, []);
+  }, [nameCompanyForList]);
 
   const handleNameCompanyFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -61,6 +60,11 @@ function App() {
   };
 
   return (
+    <>
+    <header>
+      <img src={logo_url } alt="logo" />
+      <h3>FloraPack</h3>
+    </header>
     <main>
       {isModalVisible ? (
         <ModalWindowForNameCompany onSubmit={handleNameCompanyFormSubmit} />
@@ -74,6 +78,11 @@ function App() {
         </>
       )}
     </main>
+    <footer>
+  <p>&copy; Dj-Rom, Union Europe 2025</p>
+</footer>
+</>
+
   );
 }
 

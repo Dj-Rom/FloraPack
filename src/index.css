@@ -9,14 +9,34 @@ html {
 }
 
 body {
-  min-height: 100vh;
+  height: 100%;
   background: linear-gradient(#f0f6f8, #e0e1e7);
+}
+
+.whatsApp {
+  display: inline-block;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+
+  img {
+    width: 3rem;
+    height: 2rem;
+    border-radius: 50%;
+  }
+}
+
+.listBtns {
+  display: flex;
+  justify-content: space-between;
 }
 
 main {
   width: 90%;
   max-width: 40rem;
-  margin: 3rem auto;
+  height: 88%;
+  margin: 3rem 0 1rem 0;
   padding: 2rem;
   background-color: #3a4346;
   color: #f0f6f8;
@@ -25,11 +45,13 @@ main {
 }
 
 header {
+  text-align: center;
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  justify-content: center;
+  flex-direction: row;
+  gap: 30%;
+  justify-content: space-around;
   align-items: center;
+  height: 10%;
 }
 
 img {
@@ -38,10 +60,13 @@ img {
   border-radius: 50%;
 }
 
-header h1 {
+header h3 {
   margin: 0;
-  font-size: 1.75rem;
-  color: #f7e596;
+  font-size: 2.45rem;
+  color: #40cc95;
+  font-family: "Special Gothic Condensed One", sans-serif;
+  font-weight: 900;
+  font-style: normal;
 }
 
 label {
@@ -81,11 +106,13 @@ form button:hover {
 
 ul {
   list-style: none;
-  margin: 20px 0;
+  margin: 20px auto;
   padding: 0;
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  justify-items: center;
+  justify-content: center;
 }
 
 li {
@@ -157,4 +184,37 @@ form button {
 
 button[type="submit"] {
   margin-top: 20px;
+}
+
+
+@media screen and (max-width: 700px) {
+  main {
+    margin-top: 4%;
+    width: 98%;
+    min-height: 88%;
+    max-width: 98%;
+    border-radius: 6px;
+    box-shadow: 0 0 10px #00000040;
+
+    form {
+      height: 571px;
+    }
+  }
+
+  li {
+    width: 100%;
+    box-shadow: none;
+
+  }
+
+  .modalForm {
+    position: relative;
+    padding: 82% 0;
+    z-index: 2;
+    height: 71Vh;
+  }
+
+  .lists {
+    margin-top: 50px;
+  }
 }
