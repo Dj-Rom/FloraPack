@@ -1,0 +1,33 @@
+.modalForm {
+    padding-top: 40%;
+    position: absolute;
+    background: #242121;
+    width: 100%;
+    height: max-content;
+    min-height: 451px;
+    z-index: 1;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    justify-content: center;
+
+
+    select,
+    label {
+        margin-top: 20px;
+        width: 200px;
+    }
+
+    select {
+        color: black;
+        border-radius: 0px;
+        background-color: #dfd9be;
+    }
+
+    .backBtnSelectLanguage {
+        width: 200px;
+        margin-top: 30px;
+    }
+}

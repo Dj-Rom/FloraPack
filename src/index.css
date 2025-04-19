@@ -13,29 +13,10 @@ body {
   background: linear-gradient(#f0f6f8, #e0e1e7);
 }
 
-.whatsApp {
-  display: inline-block;
-  padding: 10px 20px;
-  color: white;
-  border-radius: 5px;
-  text-decoration: none;
-
-  img {
-    width: 3rem;
-    height: 2rem;
-    border-radius: 50%;
-  }
-}
-
-.listBtns {
-  display: flex;
-  justify-content: space-between;
-}
-
 main {
   width: 90%;
   max-width: 40rem;
-  height: 88%;
+  min-height: 81vh;
   margin: 3rem 0 1rem 0;
   padding: 2rem;
   background-color: #3a4346;
@@ -47,11 +28,13 @@ main {
 header {
   text-align: center;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 30%;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   height: 10%;
+  flex-wrap: nowrap;
+
 }
 
 img {
@@ -60,151 +43,24 @@ img {
   border-radius: 50%;
 }
 
-header h3 {
-  margin: 0;
-  font-size: 2.45rem;
-  color: #40cc95;
-  font-family: "Special Gothic Condensed One", sans-serif;
-  font-weight: 900;
-  font-style: normal;
-}
-
-label {
-  display: block;
-  font-size: 0.85rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #dfd9be;
-}
-
-input {
-  font: inherit;
-  width: 100%;
-  padding: 0.5rem;
-  background-color: #b4b6c4;
-  border: none;
-  border-radius: 4px;
-}
-
-form button {
-  display: block;
-  width: 100%;
-  padding: 0.75rem;
-  margin-top: 1rem;
-  background-color: #f7e596;
-  border: none;
-  border-radius: 4px;
-  font: inherit;
-  font-weight: bold;
-  color: #3a4346;
-  cursor: pointer;
-}
-
-form button:hover {
-  background-color: #f9e175;
-}
-
-ul {
-  list-style: none;
-  margin: 20px auto;
-  padding: 0;
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  justify-items: center;
-  justify-content: center;
-}
-
-li {
-  background-color: #475357;
-  padding: .2rem;
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-
-}
-
-li article {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-li h2 {
-  margin: 0;
-  font-size: 1.25rem;
-  color: #b1c1c3;
-}
-
-li p {
-  margin: 0;
-  font-size: 0.85rem;
-  color: #dfd9be;
-}
-
-li button {
-  font: inherit;
-  padding: 0 0.5rem;
-  background: transparent;
-  border: none;
-  color: #909a9a;
-  cursor: pointer;
-}
-
-li button:hover {
-  color: #f9a73b;
-}
-
-.fallback {
-  text-align: center;
-  color: #acd1ce;
-}
-
-form input,
-form button {
-  padding: 0;
-  margin: 0 2px;
-  min-height: 2vw;
-  max-height: 9vw;
-  text-align: center;
-  color: black;
-  font-weight: 900;
-  opacity: 1;
-}
-
-.formInput::placeholder {
-  color: black;
-  font-weight: 900;
-  opacity: 1;
-}
-
-.inputBtnGroup {
-  margin: 10px auto;
-  display: flex;
-}
-
-button[type="submit"] {
-  margin-top: 20px;
-}
-
-
 @media screen and (max-width: 700px) {
   main {
     margin-top: 4%;
     width: 98%;
-    min-height: 88%;
+    min-height: 81vh;
     max-width: 98%;
     border-radius: 6px;
     box-shadow: 0 0 10px #00000040;
-
-    form {
-      height: 571px;
-    }
   }
 
   li {
     width: 100%;
     box-shadow: none;
+    height: fit-content;
+  }
 
+  .naviSettingBtn {
+    display: flex;
   }
 
   .modalForm {

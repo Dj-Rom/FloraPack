@@ -1,0 +1,107 @@
+.modalFormPackList {
+    position: absolute;
+    padding: 35px 0;
+    top: 75px;
+    background: #242121;
+    width: 100%;
+    height: max-content;
+    z-index: 1000;
+    opacity: 0.97;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    backdrop-filter: blur(6px);
+    outline: none;
+
+    select,
+    label {
+        margin-top: 20px;
+        width: 200px;
+    }
+
+    label {
+        border-radius: 33px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        background: none;
+        width: 64px;
+
+        // 💡 Prevent tap highlight on mobile (iOS/Safari/Chrome)
+        -webkit-tap-highlight-color: transparent;
+        -webkit-focus-ring-color: transparent;
+    }
+
+
+    label:focus {
+        outline-offset: 0;
+        outline: none;
+    }
+
+    select {
+        background-color: #dfd9be;
+    }
+
+    .backBtnSelectLanguage {
+        width: 200px;
+        margin-top: 30px;
+    }
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+
+
+
+
+}
+
+.slider {
+    margin: 0 auto;
+    width: 64px;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: gray;
+    border-radius: 34px;
+    transition: background-color 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #46aa14;
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}

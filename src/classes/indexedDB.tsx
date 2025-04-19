@@ -1,4 +1,4 @@
-import { PackagingListInterface } from "./App";
+import { PackagingListInterface } from "../App";
 
 interface IndexedDBManager {
     openDatabase(): Promise<IDBDatabase>;
