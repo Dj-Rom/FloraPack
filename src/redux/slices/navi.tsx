@@ -5,7 +5,6 @@ type SettingPackSliceState = {
     isSelectPackList: boolean;
 };
 
-// Load from localStorage
 const savedState = localStorage.getItem('FloraPackSettings');
 const initialState: SettingPackSliceState = savedState
     ? JSON.parse(savedState)

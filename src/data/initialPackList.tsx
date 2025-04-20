@@ -1,0 +1,25 @@
+import { InitialPackList } from "../components/FormForListPackaging";
+
+ export const initialPackList: InitialPackList = {
+    'KK': 0,
+    'KK-SH': 0,
+    'CC': 0,
+    'NC': 0,
+    'TAG-5': 0,
+    'TAG-6': 0,
+    'CC-SH': 0,
+    'EXT': 0,
+    'EP': 0,
+    'PALETA': 0,
+    '533/544': 0,
+    '560': 0,
+    '566': 0,
+    '577': 0,
+    '588': 0,
+    '596': 0,
+    '597': 0,
+    '598': 0,
+    '520': 0,
+    '595': 0,
+    'TRAAY': 0,
+  };

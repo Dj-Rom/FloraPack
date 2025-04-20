@@ -1,0 +1,18 @@
+img {
+    width: 78vw;
+    height: auto;
+    border-radius: 3px;
+    margin: 10px auto;
+}
+
+.packInfoSection {
+    padding-bottom: 30px;
+    border-bottom: 2px solid rgb(176, 242, 21);
+}
+
+@media screen and (min-width:700px) {
+    .packInformationPageSectionLeft img {
+        width: 400px;
+    }
+
+}
