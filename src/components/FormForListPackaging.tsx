@@ -4,11 +4,13 @@ import { RootState } from '../redux/store.tsx';
 import { useDispatch } from "react-redux";
 import { settingsFormAllItemsIsShow, settingsFormAllItemsIsUnshow } from "../redux/slices/settingsPack.tsx";
 import styles from './../styles/packagingForm.module.scss'
+import { initialPackList } from "../data/initialPackList.tsx";
+import { setPackItem } from "../redux/slices/packagingList.tsx";
 
 // import Alert from '@mui/material/Alert';
 // import CheckIcon from '@mui/icons-material/Check';
 
-export interface InitialList {
+export interface InitialPackList {
   [key: string]: number;
 }
 
@@ -18,63 +20,34 @@ export default function FormForListPackaging({ onAddList }: any) {
   const [isButtonShowMore, setIsButtonShowMore] = useState(false);
   const dispatch = useDispatch();
   const listPacksForView = useSelector((state: RootState) => state.settingsPack);
-  const initialList: InitialList = {
-    'KK': 0,
-    'KK-SH': 0,
-    'CC': 0,
-    'NC': 0,
-    'TAG-5': 0,
-    'TAG-6': 0,
-    'CC-SH': 0,
-    'EXT': 0,
-    'EP': 0,
-    'PALETA': 0,
-    '533/544': 0,
-    '560': 0,
-    '566': 0,
-    '577': 0,
-    '588': 0,
-    '596': 0,
-    '597': 0,
-    '598': 0,
-    '520': 0,
-    '595': 0,
-    'TRAAY': 0,
-  };
-
-  const [packagingList, setPackagingList] = useState<InitialList>(initialList);
-
+  const packagingList = useSelector((state: RootState) => state.dataPackList);
   function handlePackagingForm(event: FormEvent) {
     event.preventDefault();
     onAddList(packagingList)
   }
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    event.preventDefault()
     const { name, value } = event.target;
-    setPackagingList(prev => ({
-      ...prev,
-      [name]: Number(value)
-    }));
+    dispatch(setPackItem({ name: name, value: value }))
   }
 
   function handleChangeWithButton(event: React.MouseEvent<HTMLButtonElement>, sign: string) {
     event.preventDefault()
+
+
     const parent = (event.target as HTMLElement).parentElement;
     const itemName: string = parent!.dataset.item || "";
     if (sign === "+") {
-      setPackagingList(prev => ({
-        ...prev,
-        [itemName]: Number(packagingList[itemName] + 1)
-      }))
+      dispatch(setPackItem(
+        { name: [itemName], value: Number(packagingList[itemName] + 1) }
+      ))
     } else if (sign === "-" && packagingList[itemName] > 0) {
-      setPackagingList(prev => ({
-        ...prev,
-        [itemName]: Number(packagingList[itemName] - 1)
-      }))
+      dispatch(setPackItem(
+        { name: [itemName], value: Number(packagingList[itemName] - 1) }))
     }
+
   }
-
-
 
 
   return (

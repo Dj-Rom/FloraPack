@@ -40,6 +40,13 @@ export const settingsPackSlice = createSlice({
   name: 'settingsPack',
   initialState,
   reducers: {
+    settingsPackAddNewPackItem: (state, action) => {
+      state[action.payload] = false
+      localStorage.setItem(
+        'FloraPackSettingsPackagingList',
+        JSON.stringify({ packList: { ...state } })
+      );
+    },
     settingsViewFormChangeItem: (state, action: PayloadAction<string>) => {
       const key = action.payload;
       if (key in state) {
@@ -50,6 +57,7 @@ export const settingsPackSlice = createSlice({
         );
       }
     },
+
     settingsFormAllItemsIsShow: (state) => {
       Object.keys(state).forEach((key) => {
         state[key] = true;
@@ -66,6 +74,7 @@ export const settingsPackSlice = createSlice({
 });
 
 export const {
+  settingsPackAddNewPackItem,
   settingsViewFormChangeItem,
   settingsFormAllItemsIsShow,
   settingsFormAllItemsIsUnshow,

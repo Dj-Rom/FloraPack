@@ -1,12 +1,14 @@
 .modalFormPackList {
+    padding-top: 10%;
     position: absolute;
     padding: 35px 0;
-    top: 75px;
-    background: #242121;
+    top: 0px;
+    background: #3a4346;
     width: 100%;
+    max-width: 40rem;
     height: max-content;
     z-index: 1000;
-    opacity: 0.97;
+    opacity: 0.95;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,6 +16,8 @@
     flex-wrap: wrap;
     backdrop-filter: blur(6px);
     outline: none;
+    z-index: 1;
+
 
     select,
     label {
@@ -29,8 +33,6 @@
         cursor: pointer;
         background: none;
         width: 64px;
-
-        // 💡 Prevent tap highlight on mobile (iOS/Safari/Chrome)
         -webkit-tap-highlight-color: transparent;
         -webkit-focus-ring-color: transparent;
     }
@@ -46,7 +48,7 @@
     }
 
     .backBtnSelectLanguage {
-        width: 200px;
+        width: 300px;
         margin-top: 30px;
     }
 }
@@ -104,4 +106,45 @@ input:checked+.slider {
 
 input:checked+.slider:before {
     transform: translateX(26px);
+}
+
+.modalFormAddPackNameBtn {
+    margin: 14px auto;
+    display: flex;
+    background: none;
+    justify-content: center;
+    align-items: center;
+
+}
+
+fieldset {
+    legend {
+        color: #dfd9be;
+    }
+
+    margin: 1px auto;
+    border-radius: 5px;
+    display: flex;
+    border-color: rgb(223, 217, 190);
+    text-align: center;
+    justify-content: center;
+}
+
+@media screen and (min-width: 700px) {
+    fieldset {
+        img {
+            width: 60px;
+            height: 60px;
+            margin: 0;
+        }
+    }
+
+    .modalFormAddPackNameBtn {
+        margin: 0;
+    }
+
+    .paclListBackBtn {
+        margin: 40px 15vw;
+        min-width: 300px;
+    }
 }
