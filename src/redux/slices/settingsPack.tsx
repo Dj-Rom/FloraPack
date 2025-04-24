@@ -33,15 +33,20 @@ localStorage.getItem('FloraPackSettingsPackagingList') ? "" : localStorage.setIt
 );
 const savedSettings = localStorage.getItem('FloraPackSettingsPackagingList');
 const savedPackList = savedSettings ? JSON.parse(savedSettings).packList : null;
-
 const initialState: SettingPackSliceState = savedPackList || defaultState;
-
 export const settingsPackSlice = createSlice({
   name: 'settingsPack',
   initialState,
   reducers: {
     settingsPackAddNewPackItem: (state, action) => {
       state[action.payload] = false
+      localStorage.setItem(
+        'FloraPackSettingsPackagingList',
+        JSON.stringify({ packList: { ...state } })
+      );
+    },
+    settingsPackDeletePackItem: (state, action) => {
+      delete state[action.payload]
       localStorage.setItem(
         'FloraPackSettingsPackagingList',
         JSON.stringify({ packList: { ...state } })
@@ -78,6 +83,7 @@ export const {
   settingsViewFormChangeItem,
   settingsFormAllItemsIsShow,
   settingsFormAllItemsIsUnshow,
+  settingsPackDeletePackItem
 } = settingsPackSlice.actions;
 
 export default settingsPackSlice.reducer;

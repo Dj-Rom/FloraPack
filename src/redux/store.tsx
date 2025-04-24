@@ -5,6 +5,7 @@ import dataPackListReducer from './slices/packagingList'
 import modalWindowsReducer from './slices/modalWindows'
 import naviReducer from './slices/navi'
 import alertReducer from './slices/alert'
+import settingWhatsAppMessageReducer from './slices/settingsWhatsAppMessage'
 export const store = configureStore({
   reducer: {
     settingsPack: settingsPackReducer,
@@ -12,7 +13,8 @@ export const store = configureStore({
     navi: naviReducer,
     dataPackList: dataPackListReducer,
     modalWindows: modalWindowsReducer,
-    alert: alertReducer
+    alert: alertReducer,
+    settingWhatsAppMessage: settingWhatsAppMessageReducer,
   }
 });
 

@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 type SettingPackSliceState = {
     isSelectLanguage: boolean;
     isSelectPackList: boolean;
+    isSelectWhatsAppMessage: boolean
 };
 
 const savedState = localStorage.getItem('FloraPackSettings');
@@ -11,6 +12,7 @@ const initialState: SettingPackSliceState = savedState
     : {
         isSelectLanguage: false,
         isSelectPackList: false,
+        isSelectWhatsAppMessage: false
     };
 
 export const naviSlice = createSlice({
@@ -19,14 +21,16 @@ export const naviSlice = createSlice({
     reducers: {
         setIsSelectLanguage: (state) => {
             state.isSelectLanguage = !state.isSelectLanguage;
-            
+
         },
         setIsSelectPackList: (state) => {
             state.isSelectPackList = !state.isSelectPackList;
-        
+        },
+        setIsSelectWhatsAppMessage: (state) => {
+            state.isSelectWhatsAppMessage = !state.isSelectWhatsAppMessage;
         },
     },
 });
 
-export const { setIsSelectLanguage, setIsSelectPackList } = naviSlice.actions;
+export const { setIsSelectLanguage, setIsSelectPackList, setIsSelectWhatsAppMessage } = naviSlice.actions;
 export default naviSlice.reducer;

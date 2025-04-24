@@ -3,8 +3,6 @@ import { initialPackList } from '../../data/initialPackList';
 import { InitialPackList } from '../../components/FormForListPackaging';
 
 
-
-// Load from localStorage
 const savedState = localStorage.getItem('dataPackLists');
 const initialState: InitialPackList = savedState
     ? JSON.parse(savedState)
@@ -18,6 +16,12 @@ export const dataPackListSlice = createSlice({
             state[action.payload.name] = Number(action.payload.value);
             localStorage.setItem('dataPackLists', JSON.stringify({ ...state }));
         },
+        clearAllPackItems: (state) => {
+            for (const key in state) {
+                state[key] = 0
+            }
+            localStorage.setItem('dataPackLists', JSON.stringify({ ...state }));
+        },
         addNewPackName: (state, action) => {
             console.log(action.payload);
             state[action.payload] = 0
@@ -27,5 +31,5 @@ export const dataPackListSlice = createSlice({
     },
 });
 
-export const { setPackItem, addNewPackName } = dataPackListSlice.actions;
+export const { setPackItem, addNewPackName, clearAllPackItems } = dataPackListSlice.actions;
 export default dataPackListSlice.reducer;

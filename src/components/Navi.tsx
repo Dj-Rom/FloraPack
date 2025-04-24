@@ -10,9 +10,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { RootState } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { setIsSelectLanguage, setIsSelectPackList } from '../redux/slices/navi';
+import { setIsSelectLanguage, setIsSelectPackList, setIsSelectWhatsAppMessage } from '../redux/slices/navi';
 import { useNavigate } from 'react-router-dom';
-
 
 export default function MenuAppBar() {
     const navigator = useNavigate();
@@ -25,7 +24,6 @@ export default function MenuAppBar() {
 
     const handlePageMenu = (event: React.MouseEvent<HTMLElement>) => {
         setPageMenuAnchorEl(event.currentTarget);
-
     };
 
     const handleSettingsMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -36,7 +34,6 @@ export default function MenuAppBar() {
     const handleClose = () => {
         setPageMenuAnchorEl(null);
         setSettingsMenuAnchorEl(null);
-
     };
 
 
@@ -44,7 +41,7 @@ export default function MenuAppBar() {
         handleClose();
         navigator(path);
     };
-   
+
     return (
         <Box sx={{ display: 'flex', justifyContent: 'space-between', borderRadius: '94px', alignItems: 'center', width: '100%' }}>
             <AppBar position="static">
@@ -123,8 +120,8 @@ export default function MenuAppBar() {
                             className="naviSettingBtn"
                             disabled={isSelectLanguage || isSelectPackList}
                             onClick={() => {
-                                handleClose();
                                 dispatch(setIsSelectLanguage());
+                                handleClose();
                             }}
                         >
                             {language.languageLabel}
@@ -138,6 +135,16 @@ export default function MenuAppBar() {
                             }}
                         >
                             {language.packagingList}
+                        </MenuItem>
+                        <MenuItem
+                            className="naviSettingBtn"
+                            disabled={isSelectPackList || isSelectLanguage}
+                            onClick={() => {
+                                handleClose();
+                                dispatch(setIsSelectWhatsAppMessage());
+                            }}
+                        >
+                            {language.settingsWhatsAppMessage}
                         </MenuItem>
                     </Menu>
                 </Toolbar>

@@ -12,6 +12,10 @@ import { Alert, Snackbar } from '@mui/material';
 import { clearAlert } from './redux/slices/alert.tsx';
 import { useDispatch } from 'react-redux';
 import { useToggleFocusMode } from './helpers/uiHelpers.tsx';
+import SelectWhatsApp from './components/SelectWhatsApp.tsx';
+import { useEffect } from 'react';
+
+
 
 
 export interface PackagingListInterface {
@@ -22,13 +26,15 @@ export interface PackagingListInterface {
 }
 
 function App() {
+  const language = useSelector((state: RootState) => state.settingsLanguage)
+  const { isSelectLanguage, isSelectPackList, isSelectWhatsAppMessage } = useSelector((state: RootState) => state.navi);
+  useEffect(() => {
+    document.documentElement.lang = language.language;
+  }, [language]);
   useToggleFocusMode()
-  const isSelectLanguage = useSelector((state: RootState) => state.navi.isSelectLanguage);
-  const isSelectPackList = useSelector((state: RootState) => state.navi.isSelectPackList);
   const alert = useSelector((state: RootState) => state.alert)
   const dispatch = useDispatch()
   const open = Boolean(alert.message);
-
   const handleClose = () => {
     dispatch(clearAlert());
   };
@@ -51,6 +57,7 @@ function App() {
         <PrimarySearchAppBar />
         {isSelectLanguage && <SelectLanguage />}
         {isSelectPackList && <SelectPackList />}
+        {isSelectWhatsAppMessage && <SelectWhatsApp />}
       </header>
 
       <main>

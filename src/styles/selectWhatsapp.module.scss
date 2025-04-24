@@ -1,0 +1,11 @@
+@import url(./selectPackList.module.scss);
+
+.modalFormPackList {
+    height: max-content;
+    width: 100%;
+    overflow-x: hidden;
+
+    h5 {
+        color: #dfd9be;
+    }
+}

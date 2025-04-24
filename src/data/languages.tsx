@@ -1,6 +1,4 @@
-
 export type LanguageLabels = {
-
   language: string;
   save: string;
   showMore: string;
@@ -17,10 +15,15 @@ export type LanguageLabels = {
   example: string;
   home: string;
   information: string;
+  settingsWhatsAppMessage: string;
+  whatsAppMessagePrompt: string;
+  listEmptyWarning: string;
 };
+
 type SettingLanguageSliceState = {
   [key: string]: LanguageLabels;
 };
+
 export const allLanguages: SettingLanguageSliceState = {
   polish: {
     language: 'pl',
@@ -39,6 +42,9 @@ export const allLanguages: SettingLanguageSliceState = {
     example: 'Przykład',
     home: 'Strona główna',
     information: 'Informacje',
+    settingsWhatsAppMessage: 'Ustawienia wiadomości WhatsApp',
+    whatsAppMessagePrompt: 'Czy chcesz wyświetlić w wiadomości WhatsApp: datę utworzenia listy pakowania lub nazwę firmy (np. firma: Flora)?',
+    listEmptyWarning: 'Lista nie może być pusta',
   },
   deutsch: {
     language: 'de',
@@ -57,6 +63,9 @@ export const allLanguages: SettingLanguageSliceState = {
     example: 'Beispiel',
     home: 'Startseite',
     information: 'Informationen',
+    settingsWhatsAppMessage: 'WhatsApp-Nachrichteneinstellungen',
+    whatsAppMessagePrompt: 'Möchten Sie in der WhatsApp-Nachricht das Erstellungsdatum der Packliste oder den Firmennamen anzeigen (z. B. Firma: Flora)?',
+    listEmptyWarning: 'Die Liste darf nicht leer sein',
   },
   english: {
     language: 'en',
@@ -75,6 +84,9 @@ export const allLanguages: SettingLanguageSliceState = {
     example: 'Example',
     home: 'Home',
     information: 'Information',
+    settingsWhatsAppMessage: 'Settings WhatsApp Message',
+    whatsAppMessagePrompt: 'Do you want to show in the WhatsApp message: the date the pack list was created or the company title (e.g., company: Flora)?',
+    listEmptyWarning: 'The list must not be empty',
   },
   russian: {
     language: 'ru',
@@ -93,6 +105,9 @@ export const allLanguages: SettingLanguageSliceState = {
     example: 'Пример',
     home: 'Главная',
     information: 'Информация',
+    settingsWhatsAppMessage: 'Настройки сообщений WhatsApp',
+    whatsAppMessagePrompt: 'Хотите отобразить в сообщении WhatsApp дату создания списка упаковки или название компании (например, компания: Flora)?',
+    listEmptyWarning: 'Список не должен быть пустым',
   },
   dutch: {
     language: 'nl',
@@ -111,6 +126,9 @@ export const allLanguages: SettingLanguageSliceState = {
     example: 'Voorbeeld',
     home: 'Startpagina',
     information: 'Informatie',
+    settingsWhatsAppMessage: 'WhatsApp-berichtinstellingen',
+    whatsAppMessagePrompt: 'Wilt u in het WhatsApp-bericht de datum van het aanmaken van de verpakkingslijst of de bedrijfsnaam tonen (bijv. bedrijf: Flora)?',
+    listEmptyWarning: 'De lijst mag niet leeg zijn',
   },
   ukrainian: {
     language: 'ua',
@@ -129,5 +147,8 @@ export const allLanguages: SettingLanguageSliceState = {
     example: 'Приклад',
     home: 'Головна',
     information: 'Інформація',
+    settingsWhatsAppMessage: 'Налаштування повідомлень WhatsApp',
+    whatsAppMessagePrompt: 'Бажаєте показати у повідомленні WhatsApp: дату створення списку пакування чи назву компанії (наприклад, компанія: Flora)?',
+    listEmptyWarning: 'Список не повинен бути порожнім',
   },
 };

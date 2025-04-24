@@ -1,5 +1,6 @@
 .modalForm {
     position: absolute;
+    padding-top: 30%;
     background: #3a4346;
     width: 100%;
     height: max-content;
@@ -11,7 +12,7 @@
     align-content: center;
     flex-direction: column;
     justify-content: center;
-
+    overflow: hidden;
 
     select,
     label {
