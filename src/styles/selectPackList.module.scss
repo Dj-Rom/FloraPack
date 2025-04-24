@@ -127,6 +127,7 @@ fieldset {
         color: #dfd9be;
     }
 
+    position: relative;
     margin: 1px auto;
     border-radius: 5px;
     display: flex;
@@ -142,7 +143,7 @@ fieldset {
 
 @media screen and (min-width: 700px) {
     fieldset {
-        position: relative;
+
 
         img {
             width: 60px;
