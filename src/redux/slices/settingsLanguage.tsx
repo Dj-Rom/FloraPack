@@ -1,11 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { allLanguages, LanguageLabels } from '../../data/languages';
 
-
-
-
-
-
 const langMap: { [key: string]: keyof typeof allLanguages } = {
   pl: 'polish',
   en: 'english',
@@ -17,9 +12,7 @@ const langMap: { [key: string]: keyof typeof allLanguages } = {
 
 const savedSettings = localStorage.getItem('FloraPackSettingsLanguage');
 const savedLanguageKey = savedSettings ? JSON.parse(savedSettings).language : 'pl';
-
 const initialState: LanguageLabels = allLanguages[langMap[savedLanguageKey] || 'polish'];
-
 export const settingsLanguageSlice = createSlice({
   name: 'settingsLanguage',
   initialState,

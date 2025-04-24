@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import styles from './../styles/selectPackList.module.scss';
 import { setIsSelectPackList } from "../redux/slices/navi";
-import { settingsViewFormChangeItem } from "../redux/slices/settingsPack";
+import { settingsPackDeletePackItem, settingsViewFormChangeItem } from "../redux/slices/settingsPack";
 import logoAddNewItem from './../assets/icons8-add-50.png'
 import ModalFormForAddToPackList from './ModalFormForAddToPackList.tsx'
 import { setIsModalWindows } from "../redux/slices/modalWindows.tsx";
@@ -31,6 +31,7 @@ export default function SelectPackList() {
                 margin: "1px auto",
               }}
             >
+              <button className={styles.deleteBtnSelectPack} onClick={() => { dispatch(settingsPackDeletePackItem(key)) }} title={language.delete} type="button">X</button>
               <label className={styles.switch}>
                 <input
                   type="checkbox"
@@ -45,8 +46,6 @@ export default function SelectPackList() {
           )
           )
         }
-
-
         <fieldset className={styles.fieldsetModalFormAddPackNameBtn}>
           <legend>{'add new'}</legend>
           <button type="button"
@@ -55,10 +54,6 @@ export default function SelectPackList() {
             <img src={logoAddNewItem} alt="+" />
           </button>
         </fieldset>
-
-
-
-
         <button
           type="button"
           className={styles.paclListBackBtn}

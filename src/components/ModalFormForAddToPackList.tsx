@@ -4,7 +4,7 @@ import { RootState } from "../redux/store";
 import { addNewPackName } from '../redux/slices/packagingList';
 import { setIsModalWindows } from '../redux/slices/modalWindows';
 import { settingsPackAddNewPackItem } from '../redux/slices/settingsPack';
-import { clearAlert, setAlert } from '../redux/slices/alert';
+import { setAlert } from '../redux/slices/alert';
 
 export default function ModalFormForAddToPackList() {
     const language = useSelector((state: RootState) => state.settingsLanguage);
@@ -18,14 +18,12 @@ export default function ModalFormForAddToPackList() {
             dispatch(settingsPackAddNewPackItem(inputValue));
             dispatch(addNewPackName(inputValue));
             dispatch(setIsModalWindows('isModalFormForAddNewName'));
-            dispatch(setAlert({type:'success', message:'Added successfully!'}));
+            dispatch(setAlert({ type: 'success', message: 'Added successfully!' }));
 
         } catch (error: any) {
-            dispatch(setAlert({type: 'error' , message: `Don't added: ${error.message || error}}`}));
+            dispatch(setAlert({ type: 'error', message: `Don't added: ${error.message || error}}` }));
         }
     };
-
-
     return (
         <form className={styles.modalFormAddToPackList} onSubmit={handleSubmit}>
             <fieldset className={styles.fieldsetModalFormAddPackName}>
@@ -33,9 +31,6 @@ export default function ModalFormForAddToPackList() {
                 <input type="text" name='namePack' placeholder={`${language.example} : KK`} />
             </fieldset>
             <button type="submit">{language.save}</button>
-
-            
-            
         </form>
     );
 }

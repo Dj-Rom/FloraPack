@@ -6,8 +6,9 @@
     background: #3a4346;
     width: 100%;
     max-width: 40rem;
-    height: max-content;
+    height: 100vh;
     z-index: 1000;
+    overflow: auto;
     opacity: 0.95;
     display: flex;
     align-items: center;
@@ -15,9 +16,13 @@
     flex-direction: row;
     flex-wrap: wrap;
     backdrop-filter: blur(6px);
+    overflow-x: hidden;
     outline: none;
     z-index: 1;
 
+    img {
+        width: auto;
+    }
 
     select,
     label {
@@ -130,8 +135,15 @@ fieldset {
     justify-content: center;
 }
 
+.paclListBackBtn {
+    margin: 20px 30vw;
+    max-width: 300px;
+}
+
 @media screen and (min-width: 700px) {
     fieldset {
+        position: relative;
+
         img {
             width: 60px;
             height: 60px;
@@ -147,4 +159,18 @@ fieldset {
         margin: 40px 15vw;
         min-width: 300px;
     }
+}
+
+.deleteBtnSelectPack {
+    background: none;
+    color: #dfd9be;
+    min-height: 21px;
+    height: 21px;
+    width: 21px;
+    margin: 0;
+    padding: 0;
+    right: 0%;
+    position: absolute;
+    top: -8px;
+
 }

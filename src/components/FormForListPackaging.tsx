@@ -4,16 +4,10 @@ import { RootState } from '../redux/store.tsx';
 import { useDispatch } from "react-redux";
 import { settingsFormAllItemsIsShow, settingsFormAllItemsIsUnshow } from "../redux/slices/settingsPack.tsx";
 import styles from './../styles/packagingForm.module.scss'
-import { initialPackList } from "../data/initialPackList.tsx";
-import { setPackItem } from "../redux/slices/packagingList.tsx";
-
-// import Alert from '@mui/material/Alert';
-// import CheckIcon from '@mui/icons-material/Check';
-
+import { clearAllPackItems, setPackItem } from "../redux/slices/packagingList.tsx";
 export interface InitialPackList {
   [key: string]: number;
 }
-
 export default function FormForListPackaging({ onAddList }: any) {
 
   const language = useSelector((state: RootState) => state.settingsLanguage)
@@ -24,18 +18,21 @@ export default function FormForListPackaging({ onAddList }: any) {
   function handlePackagingForm(event: FormEvent) {
     event.preventDefault();
     onAddList(packagingList)
+    dispatch(clearAllPackItems())
   }
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    event.preventDefault()
+    event.preventDefault();
+    if (event.target.value[0] == '0') {
+      const [, value] = event.target.value
+      event.target.value = value
+    }
     const { name, value } = event.target;
     dispatch(setPackItem({ name: name, value: value }))
   }
 
   function handleChangeWithButton(event: React.MouseEvent<HTMLButtonElement>, sign: string) {
     event.preventDefault()
-
-
     const parent = (event.target as HTMLElement).parentElement;
     const itemName: string = parent!.dataset.item || "";
     if (sign === "+") {
@@ -46,9 +43,7 @@ export default function FormForListPackaging({ onAddList }: any) {
       dispatch(setPackItem(
         { name: [itemName], value: Number(packagingList[itemName] - 1) }))
     }
-
   }
-
 
   return (
     <form onSubmit={handlePackagingForm}>
@@ -64,12 +59,19 @@ export default function FormForListPackaging({ onAddList }: any) {
                   className={styles.formInput}
                   type="number"
                   name={item}
+                  min={0}
                   id={item}
-                  placeholder={packagingList[item]?.toString() || '0'}
-                  value={packagingList[item] ?? ''}
+                  value={packagingList[item] == 0 ? 0 : packagingList[item]}
                   onChange={handleChange}
-                />
+                  onFocus={(event) => {
+                    event.preventDefault();
+                    if (event.target.value[0] == '0') {
+                      const [, value] = event.target.value
+                      event.target.value = value
+                    }
+                  }}
 
+                />
                 <button type="button" onClick={(event) => handleChangeWithButton(event, '+')}>+</button>
               </div>
             </div>
@@ -88,7 +90,6 @@ export default function FormForListPackaging({ onAddList }: any) {
       }}>
         {language.showMore}
       </button>)}
-
       <button type="submit">{language.save}</button>
     </form>
   );
