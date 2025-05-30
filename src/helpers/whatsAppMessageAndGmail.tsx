@@ -1,10 +1,10 @@
 import { PackagingListInterface } from "../App";
-import { type SettingWhatsAppMessage } from './../redux/slices/settingsWhatsAppMessage'; 
+import { type SettingWhatsAppMessage } from '../redux/slices/settingsWhatsAppMessageSlice';
 import { type LanguageLabels } from './../data/languages'
 export function formatPackagingMessage(
     packagingList: PackagingListInterface,
-    settingWhatsAppMessage: SettingWhatsAppMessage, 
-    language: LanguageLabels 
+    settingWhatsAppMessage: SettingWhatsAppMessage,
+    language: LanguageLabels
 ): string {
     const { nameCompany, title, description } = packagingList;
     const formattedDate = title instanceof Date ? title.toLocaleDateString() : title;

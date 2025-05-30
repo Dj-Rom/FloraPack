@@ -9,11 +9,12 @@ import { Route, Routes } from 'react-router-dom';
 import MainPage from './pages/MainPage.tsx';
 import PackInformationPage from './pages/PackInformationPage.tsx';
 import { Alert, Snackbar } from '@mui/material';
-import { clearAlert } from './redux/slices/alert.tsx';
+import { clearAlert } from './redux/slices/alertSlice.tsx';
 import { useDispatch } from 'react-redux';
-import { useToggleFocusMode } from './helpers/uiHelpers.tsx';
+
 import SelectWhatsApp from './components/SelectWhatsApp.tsx';
 import { useEffect } from 'react';
+import HistorySettingsPanel from './components/HistorySettingsPanel.tsx';
 
 
 
@@ -27,11 +28,11 @@ export interface PackagingListInterface {
 
 function App() {
   const language = useSelector((state: RootState) => state.settingsLanguage)
-  const { isSelectLanguage, isSelectPackList, isSelectWhatsAppMessage } = useSelector((state: RootState) => state.navi);
+  const { isSelectLanguage, isSelectPackList, isSelectWhatsAppMessage, isSelectActivityHistoty } = useSelector((state: RootState) => state.navi);
   useEffect(() => {
     document.documentElement.lang = language.language;
   }, [language]);
-  useToggleFocusMode()
+
   const alert = useSelector((state: RootState) => state.alert)
   const dispatch = useDispatch()
   const open = Boolean(alert.message);
@@ -58,6 +59,7 @@ function App() {
         {isSelectLanguage && <SelectLanguage />}
         {isSelectPackList && <SelectPackList />}
         {isSelectWhatsAppMessage && <SelectWhatsApp />}
+        {isSelectActivityHistoty && <HistorySettingsPanel />}
       </header>
 
       <main>

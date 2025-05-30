@@ -1,10 +1,10 @@
 import styles from './../styles/modalFormAddToPackList.module.scss';
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
-import { addNewPackName } from '../redux/slices/packagingList';
-import { setIsModalWindows } from '../redux/slices/modalWindows';
-import { settingsPackAddNewPackItem } from '../redux/slices/settingsPack';
-import { setAlert } from '../redux/slices/alert';
+import { addNewPackName } from '../redux/slices/packagingListSlice';
+import { setIsModalWindows } from '../redux/slices/modalWindowsSlice';
+import { settingsPackAddNewPackItem } from '../redux/slices/settingsPackSlice';
+import { setAlert } from '../redux/slices/alertSlice';
 
 export default function ModalFormForAddToPackList() {
     const language = useSelector((state: RootState) => state.settingsLanguage);

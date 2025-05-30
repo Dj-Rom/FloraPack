@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { allLanguages, LanguageLabels } from '../../data/languages';
 
-const langMap: { [key: string]: keyof typeof allLanguages } = {
+export type LanguageCode = 'pl' | 'en' | 'ru' | 'nl' | 'ua' | 'de';
+
+const LOCAL_STORAGE_KEY = 'FloraPackSettingsLanguage';
+
+const langMap: Record<LanguageCode, keyof typeof allLanguages> = {
   pl: 'polish',
   en: 'english',
   ru: 'russian',
@@ -10,22 +14,25 @@ const langMap: { [key: string]: keyof typeof allLanguages } = {
   de: 'deutsch',
 };
 
-const savedSettings = localStorage.getItem('FloraPackSettingsLanguage');
-const savedLanguageKey = savedSettings ? JSON.parse(savedSettings).language : 'pl';
-const initialState: LanguageLabels = allLanguages[langMap[savedLanguageKey] || 'polish'];
+const savedSettings = localStorage.getItem(LOCAL_STORAGE_KEY);
+const savedLanguageKey: LanguageCode = savedSettings
+  ? JSON.parse(savedSettings).language
+  : 'pl';
+
+const initialState: LanguageLabels = allLanguages[langMap[savedLanguageKey]];
+
 export const settingsLanguageSlice = createSlice({
   name: 'settingsLanguage',
   initialState,
   reducers: {
-    setLanguage: (state, action: PayloadAction<string>) => {
+    setLanguage: (state, action: PayloadAction<LanguageCode>) => {
       const selectedLang = langMap[action.payload];
       if (selectedLang) {
         Object.assign(state, allLanguages[selectedLang]);
         localStorage.setItem(
-          'FloraPackSettingsLanguage',
+          LOCAL_STORAGE_KEY,
           JSON.stringify({ language: allLanguages[selectedLang].language })
         );
-
       }
     },
   },

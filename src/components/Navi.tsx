@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { RootState } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { setIsSelectLanguage, setIsSelectPackList, setIsSelectWhatsAppMessage } from '../redux/slices/navi';
+import { setIsSelectActivityHistoty, setIsSelectLanguage, setIsSelectPackList, setIsSelectWhatsAppMessage } from '../redux/slices/naviSlice';
 import { useNavigate } from 'react-router-dom';
 
 export default function MenuAppBar() {
@@ -18,6 +18,7 @@ export default function MenuAppBar() {
     const dispatch = useDispatch();
     const isSelectLanguage = useSelector((state: RootState) => state.navi.isSelectLanguage);
     const isSelectPackList = useSelector((state: RootState) => state.navi.isSelectPackList);
+    const isSelectActivityHistoty = useSelector((state: RootState) => state.navi.isSelectActivityHistoty);
     const language = useSelector((state: RootState) => state.settingsLanguage);
     const [pageMenuAnchorEl, setPageMenuAnchorEl] = React.useState<null | HTMLElement>(null);
     const [settingsMenuAnchorEl, setSettingsMenuAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -28,14 +29,12 @@ export default function MenuAppBar() {
 
     const handleSettingsMenu = (event: React.MouseEvent<HTMLElement>) => {
         setSettingsMenuAnchorEl(event.currentTarget);
-
     };
 
     const handleClose = () => {
         setPageMenuAnchorEl(null);
         setSettingsMenuAnchorEl(null);
     };
-
 
     const handlePageNavigation = (path: string) => {
         handleClose();
@@ -58,7 +57,7 @@ export default function MenuAppBar() {
                         <MenuIcon />
                     </IconButton>
 
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                    <Typography variant="h6" component="div">
                         <h4>FloraPack</h4>
                     </Typography>
 
@@ -72,53 +71,62 @@ export default function MenuAppBar() {
                     >
                         <img src={logoSettings} alt="settings" style={{ width: '2rem', height: 'auto' }} />
                     </IconButton>
+
                     <Menu
                         id="menu-pages"
+                        disableScrollLock={true}
                         anchorEl={pageMenuAnchorEl}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'left',
-                        }}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
                         keepMounted
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'left',
-                        }}
+                        transformOrigin={{ vertical: 'top', horizontal: 'left' }}
                         open={Boolean(pageMenuAnchorEl)}
                         onClose={handleClose}
+                        PaperProps={{
+                            sx: {
+                                backgroundColor: '#3a4346',
+                                boxShadow: 'none'
+                            }
+                        }}
+                        MenuListProps={{
+                            sx: {
+                                paddingRight: 0,
+                                width: '100% !important'
+                            }
+                        }}
                     >
-
-                        <MenuItem
-                            className="naviSettingBtn"
-                            onClick={() => handlePageNavigation('/FloraPack')}
-                        >
+                        <MenuItem className="naviSettingBtn" onClick={() => handlePageNavigation('/FloraPack/')}>
                             {language.home}
                         </MenuItem>
-                        <MenuItem
-                            className="naviSettingBtn"
-                            onClick={() => handlePageNavigation('/FloraPack/information')}
-                        >
+                        <MenuItem className="naviSettingBtn" onClick={() => handlePageNavigation('/FloraPack/information')}>
                             {language.information}
                         </MenuItem>
                     </Menu>
+
                     <Menu
                         id="menu-appbar"
+                        disableScrollLock={true}
                         anchorEl={settingsMenuAnchorEl}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                         keepMounted
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
+                        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
                         open={Boolean(settingsMenuAnchorEl)}
                         onClose={handleClose}
+                        PaperProps={{
+                            sx: {
+                                backgroundColor: '#3a4346',
+                                boxShadow: 'none'
+                            }
+                        }}
+                        MenuListProps={{
+                            sx: {
+                                paddingRight: 0,
+                                width: '100% !important'
+                            }
+                        }}
                     >
                         <MenuItem
                             className="naviSettingBtn"
-                            disabled={isSelectLanguage || isSelectPackList}
+                            disabled={isSelectLanguage || isSelectPackList || isSelectActivityHistoty}
                             onClick={() => {
                                 dispatch(setIsSelectLanguage());
                                 handleClose();
@@ -128,20 +136,30 @@ export default function MenuAppBar() {
                         </MenuItem>
                         <MenuItem
                             className="naviSettingBtn"
-                            disabled={isSelectPackList || isSelectLanguage}
+                            disabled={isSelectLanguage || isSelectPackList || isSelectActivityHistoty}
                             onClick={() => {
+                                dispatch(setIsSelectActivityHistoty());
                                 handleClose();
+                            }}
+                        >
+                            {language.settings} {language.history}
+                        </MenuItem>
+                        <MenuItem
+                            className="naviSettingBtn"
+                            disabled={isSelectPackList || isSelectLanguage || isSelectActivityHistoty}
+                            onClick={() => {
                                 dispatch(setIsSelectPackList());
+                                handleClose();
                             }}
                         >
                             {language.packagingList}
                         </MenuItem>
                         <MenuItem
                             className="naviSettingBtn"
-                            disabled={isSelectPackList || isSelectLanguage}
+                            disabled={isSelectPackList || isSelectLanguage || isSelectActivityHistoty}
                             onClick={() => {
-                                handleClose();
                                 dispatch(setIsSelectWhatsAppMessage());
+                                handleClose();
                             }}
                         >
                             {language.settingsWhatsAppMessage}

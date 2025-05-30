@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import styles from './../styles/selectPackList.module.scss';
-import { setIsSelectPackList } from "../redux/slices/navi";
-import { settingsPackDeletePackItem, settingsViewFormChangeItem } from "../redux/slices/settingsPack";
+import { setIsSelectPackList } from "../redux/slices/naviSlice.tsx";
+import { settingsPackDeletePackItem, settingsViewFormChangeItem } from "../redux/slices/settingsPackSlice.tsx";
 import logoAddNewItem from './../assets/icons8-add-50.png'
 import ModalFormForAddToPackList from './ModalFormForAddToPackList.tsx'
-import { setIsModalWindows } from "../redux/slices/modalWindows.tsx";
+import { setIsModalWindows } from "../redux/slices/modalWindowsSlice.tsx";
 export default function SelectPackList() {
   const dispatch = useDispatch();
   const packList = useSelector((state: RootState) => state.settingsPack);

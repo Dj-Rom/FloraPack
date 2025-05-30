@@ -1,15 +1,28 @@
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
-import { setLanguage } from "../redux/slices/settingsLanguage";
+import { setLanguage } from "../redux/slices/settingsLanguageSlice";
 import styles from './../styles/selectLanguage.module.scss'
-import { setIsSelectLanguage } from "../redux/slices/navi";
+import { setIsSelectLanguage } from "../redux/slices/naviSlice";
+import { LanguageCode } from './../redux/slices/settingsLanguageSlice'
+import { setAlert } from "../redux/slices/alertSlice";
 export default function SelectLanguage() {
   const dispatch = useDispatch();
   const language = useSelector((state: RootState) => state.settingsLanguage);
   const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(setLanguage(event.target.value));
+    const value = event.target.value;
+
+
+    const isLanguageCode = (value: string): value is LanguageCode => {
+      return ['pl', 'de', 'en', 'ru', 'nl', 'uk'].includes(value);
+    };
+    if (isLanguageCode(value)) {
+      dispatch(setLanguage(value));
+    } else {
+      dispatch(setAlert({ message: `Invalid language code:${value}`, type: 'error' }));
+    }
   };
-  
+
+
   return (
     <form className={styles.modalForm}>
       <label htmlFor="selectLanguage">{language.languageLabel}</label><select name="selectLanguage" value={language.language} onChange={handleLanguageChange}>

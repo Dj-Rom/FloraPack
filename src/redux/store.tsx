@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import settingsPackReducer from './slices/settingsPack';
-import settingsLanguageReducer from './slices/settingsLanguage'
-import dataPackListReducer from './slices/packagingList'
-import modalWindowsReducer from './slices/modalWindows'
-import naviReducer from './slices/navi'
-import alertReducer from './slices/alert'
-import settingWhatsAppMessageReducer from './slices/settingsWhatsAppMessage'
+import settingsPackReducer from './slices/settingsPackSlice';
+import settingsLanguageReducer from './slices/settingsLanguageSlice'
+import dataPackListReducer from './slices/packagingListSlice'
+import modalWindowsReducer from './slices/modalWindowsSlice'
+import naviReducer from './slices/naviSlice'
+import alertReducer from './slices/alertSlice'
+import settingWhatsAppMessageReducer from './slices/settingsWhatsAppMessageSlice'
+import activityHistoryReducer from './slices/activityHistorySlice'
 export const store = configureStore({
   reducer: {
     settingsPack: settingsPackReducer,
@@ -15,6 +16,7 @@ export const store = configureStore({
     modalWindows: modalWindowsReducer,
     alert: alertReducer,
     settingWhatsAppMessage: settingWhatsAppMessageReducer,
+    activityHistory: activityHistoryReducer,
   }
 });
 
