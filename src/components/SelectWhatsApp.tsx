@@ -2,8 +2,8 @@ import { useSelector } from 'react-redux'
 import styles from './../styles/selectWhatsapp.module.scss'
 import { RootState } from '../redux/store'
 import { useDispatch } from 'react-redux'
-import { setWhatsAppMessageSetting } from '../redux/slices/settingsWhatsAppMessage'
-import { setIsSelectWhatsAppMessage } from '../redux/slices/navi'
+import { setWhatsAppMessageSetting } from '../redux/slices/settingsWhatsAppMessageSlice'
+import { setIsSelectWhatsAppMessage } from '../redux/slices/naviSlice'
 export default function SelectWhatsApp() {
     const dispatch = useDispatch()
     function handleSettingWhatsAppMessageChange(item: 'date' | 'company') {

@@ -1,18 +1,20 @@
-
+import styles from './../styles/mainPage.module.scss'
 import IndexedDBManager from '../classes/indexedDB.tsx';
 import ModalWindowForNameCompany from '../components/ModalFormForNameCompany.tsx';
 import PackagingList from '../components/PackagingList.tsx';
 import FormForListPackaging, { type InitialPackList } from '../components/FormForListPackaging.tsx';
 import { useEffect, useState } from 'react';
 import { type PackagingListInterface } from '../App.tsx';
-import { setAlert } from '../redux/slices/alert.tsx';
+import { setAlert } from '../redux/slices/alertSlice.tsx';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store.tsx';
+import ShowLogs from '../components/ShowLogs.tsx';
 export default function MainPage() {
   const dispatch = useDispatch();
   const language = useSelector((state: RootState) => state.settingsLanguage)
   const [packagingLists, setPackagingLists] = useState<PackagingListInterface[]>([]);
+  const [isLogsVisible, setIsLogssVisible] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const indexedDB = new IndexedDBManager();
   const [nameCompanyForList, setNameCompanyForList] = useState('');
@@ -45,6 +47,8 @@ export default function MainPage() {
       setTempListData(null);
       setNameCompanyForList('');
       setIsModalVisible(false);
+    } else {
+      dispatch(setAlert({ type: "error", message: language.cannotBeEmpty }))
     }
   };
 
@@ -68,11 +72,18 @@ export default function MainPage() {
     ) : (
       <>
         <FormForListPackaging onAddList={handleAddPackagingList} />
+        <br />
+        <button type="button" className={styles.btnShowLogs} onClick={() => setIsLogssVisible(!isLogsVisible)}>{language.history}</button>
+        {isLogsVisible ? <ShowLogs /> : ""}
         <PackagingList
           onDeleteList={handleDeleteGoal}
           packagingLists={packagingLists}
         />
+
+
       </>
-    )}</>
+    )}
+
+    </>
   )
 }

@@ -8,14 +8,32 @@ html {
   font-family: 'Poppins', sans-serif;
 }
 
+
+.MuiPaper-root[tabindex="-1"] {
+  width: 310px;
+  padding: 4px;
+  height: max-content;
+  color: #f7e596;
+
+
+
+  li {
+    border: 1px solid #f7e596;
+  }
+}
+
 body {
+  padding: 0;
   height: 100%;
+  width: 100vw;
+  margin: 0 auto;
+
   background: linear-gradient(#f0f6f8, #e0e1e7);
 }
 
 main {
   z-index: 0;
-  width: 90%;
+  width: 100%;
   max-width: 40rem;
   min-height: 81vh;
   margin: 3rem 0 1rem 0;
@@ -60,51 +78,58 @@ img {
 }
 
 @media screen and (max-width: 700px) {
+
+  .MuiPaper-root[tabindex="-1"] {
+    width: 100vw;
+    outline: none;
+    background: transparent;
+    opacity: 0;
+  }
+
   main {
     margin-top: 4%;
-    width: 98%;
+    width: 99%;
     min-height: 81vh;
-    max-width: 98%;
+    max-width: 99%;
     border-radius: 6px;
     box-shadow: 0 0 10px #00000040;
   }
 
   #menu-pages div>ul,
   #menu-appbar div>ul {
-    position: fixed;
+    position: relative;
     right: 0px;
     top: 0px;
-    padding: 15vw 0vw 10vw 50vw;
+    padding: 1vh 0vw 100% 0vw;
     display: flex;
-    width: 100vw;
+    width: 100vw !important;
     text-align: -webkit-auto;
     background-color: #3a4346;
     opacity: .96 !important;
     color: rgb(223, 217, 190);
-    ;
     flex-direction: column;
     align-content: flex-end;
-    align-items: flex-end;
+    align-items: center;
     justify-content: start;
     justify-items: start;
     font-weight: 900;
-    margin: 0;
 
-    width: 96vw;
-    margin: 0 2vw;
+
+    margin: 0 auto;
     font-weight: 800;
     background: gray;
     justify-content: center;
 
     li {
       position: relative;
-      display: flex;
+
       font-weight: 800;
+      width: 99vw;
       background: #464a51;
-      width: 94vw;
-      padding: 0;
-      margin: 0vw 2vw;
-      justify-content: center;
+      justify-content: flex-start;
+      padding: 4px;
+      margin: 1vw;
+      justify-content: start;
 
     }
 
@@ -112,6 +137,8 @@ img {
 
   li {
     width: 100%;
+    margin-bottom: 0px;
+    margin-top: 38px;
     box-shadow: none;
     height: fit-content;
   }
