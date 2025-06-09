@@ -50,7 +50,7 @@ header {
   overscroll-behavior: contain;
   border-radius: 4px;
   position: sticky;
-  top: 0px;
+  top: 4px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -59,6 +59,7 @@ header {
   align-items: center;
   height: 10%;
   flex-wrap: nowrap;
+
 
   h4 {
     margin: 0;
@@ -138,7 +139,7 @@ img {
   li {
     width: 100%;
     margin-bottom: 0px;
-    margin-top: 38px;
+
     box-shadow: none;
     height: fit-content;
   }

@@ -5,14 +5,13 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import logoSettings from './../assets/icons8-settings.svg';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { RootState } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { setIsSelectActivityHistoty, setIsSelectLanguage, setIsSelectPackList, setIsSelectWhatsAppMessage } from '../redux/slices/naviSlice';
 import { useNavigate } from 'react-router-dom';
-
+import { TbSettings } from "react-icons/tb";
 export default function MenuAppBar() {
     const navigator = useNavigate();
     const dispatch = useDispatch();
@@ -69,7 +68,7 @@ export default function MenuAppBar() {
                         onClick={handleSettingsMenu}
                         color="inherit"
                     >
-                        <img src={logoSettings} alt="settings" style={{ width: '2rem', height: 'auto' }} />
+                        <TbSettings />
                     </IconButton>
 
                     <Menu
