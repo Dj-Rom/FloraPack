@@ -27,6 +27,9 @@ export interface PackagingListInterface {
 }
 
 function App() {
+
+
+
   const language = useSelector((state: RootState) => state.settingsLanguage)
   const { isSelectLanguage, isSelectPackList, isSelectWhatsAppMessage, isSelectActivityHistoty } = useSelector((state: RootState) => state.navi);
   useEffect(() => {
@@ -41,6 +44,7 @@ function App() {
   };
   return (
     <>
+
       {alert?.message && alert?.type && (
         <Snackbar
           open={open}

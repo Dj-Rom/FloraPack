@@ -1,7 +1,7 @@
 .modalFormPackList {
-    padding-top: 10%;
+
     position: absolute;
-    padding: 35px 0;
+    padding: 255px 5px 0 5px;
     top: 0px;
     background: #3a4346;
     width: 100%;
@@ -20,6 +20,7 @@
     overflow-x: hidden;
     outline: none;
     z-index: 1;
+    align-content: center;
 
     img {
         width: auto;
