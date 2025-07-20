@@ -1,0 +1,213 @@
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../redux/store";
+import styles from './../styles/calculatorModal.module.scss';
+import { useState } from "react";
+import { addLog } from "../redux/slices/activityHistorySlice";
+import { setPackItem } from "../redux/slices/packagingListSlice";
+
+interface Props {
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => any;
+  elemName: string;
+}
+
+export default function CalculatorModal({ onSubmit, elemName }: Props) {
+  const datalist = useSelector((state: RootState) => state.dataPackList);
+  const language = useSelector((state: RootState) => state.settingsLanguage);
+  const dispatch = useDispatch();
+
+  if (datalist[elemName] === undefined) {
+    return <div>Loading...</div>;
+  }
+
+  const initialValue = datalist[elemName];
+
+  const [result, setResult] = useState<string | number>(initialValue);
+  const [inputField, setInputField] = useState<number | string>(initialValue);
+  const [pendingValue, setPendingValue] = useState<number | null>(null);
+  const [pendingOperation, setPendingOperation] = useState<string | null>(null);
+
+  function inputAdd(event: React.MouseEvent<HTMLButtonElement>) {
+    event.preventDefault();
+    const number = event.currentTarget.innerHTML;
+    setInputField(prev => {
+      const newValueStr = prev === 0 ? number : prev.toString() + number;
+      return Number(newValueStr);
+    });
+  }
+
+  function handleOperation(op: string) {
+    if (pendingOperation && pendingValue !== null) {
+      let newValue = pendingValue;
+      const currentValue = inputField;
+
+      switch (pendingOperation) {
+        case "+":
+          newValue = +pendingValue + +currentValue;
+          setResult(`${pendingValue} + ${currentValue} = ${newValue}`);
+          break;
+        case "-":
+          newValue = Math.max(0, pendingValue - +currentValue);
+          break;
+        case "*":
+          newValue = Math.max(0, pendingValue * +currentValue);
+          break;
+        case "/":
+          newValue = currentValue !== 0 ? Math.max(0, pendingValue / +currentValue) : pendingValue;
+          break;
+      }
+
+      setPendingValue(newValue);
+      setResult(`${pendingValue} ${pendingOperation} ${currentValue} = ${newValue}`);
+
+      dispatch(addLog({
+        message: { name: elemName, prevalue: pendingValue, value: newValue, sign: pendingOperation },
+        datetime: Date.now()
+      }));
+
+      dispatch(setPackItem({ name: elemName, value: newValue }));
+      setInputField('');
+      setPendingOperation(op);
+    } else {
+      setPendingValue(+inputField);
+      setPendingOperation(op);
+      setInputField('');
+
+    }
+  }
+
+  function handleEqual() {
+    if (pendingOperation && pendingValue !== null) {
+      let newValue = pendingValue;
+      const currentValue = inputField;
+
+      switch (pendingOperation) {
+        case "+":
+          newValue = +pendingValue + +currentValue;
+          setResult(`${pendingValue} + ${currentValue} = ${newValue}`);
+          break;
+        case "-":
+          newValue = Math.max(0, pendingValue - +currentValue);
+          setResult(`${pendingValue} - ${currentValue} = ${newValue}`);
+          break;
+        case "*":
+          newValue = Math.max(0, pendingValue * +currentValue);
+          setResult(`${pendingValue} * ${currentValue} = ${newValue}`);
+          break;
+        case "/":
+          newValue = currentValue !== 0 ? Math.max(0, pendingValue / +currentValue) : pendingValue;
+          setResult(`${pendingValue} / ${currentValue} = ${newValue}`);
+          break;
+      }
+
+      dispatch(addLog({
+        message: { name: elemName, prevalue: pendingValue, value: newValue, sign: pendingOperation },
+        datetime: Date.now()
+      }));
+
+      dispatch(setPackItem({ name: elemName, value: newValue }));
+
+      setInputField(newValue);
+      setPendingValue(null);
+      setPendingOperation(null);
+    }
+  }
+
+  function clearInput() {
+    setInputField(0);
+    setPendingValue(null);
+    setPendingOperation(null);
+    setResult(0);
+  }
+
+  return (
+    <form className="calculatorModal" onSubmit={onSubmit}>
+      <div className={styles.calcHeader}>
+        <h4>{elemName}</h4>
+        <h5>
+          {pendingOperation && pendingValue !== null
+            ? `${pendingValue} ${pendingOperation} ${inputField}`
+            : result}
+        </h5>
+
+        <input
+          type="number"
+          min="0"
+          value={inputField}
+          onChange={e => {
+            const val = Number(e.target.value);
+            if (val >= 0) setInputField(val);
+          }}
+          name="expression"
+          id="expression"
+        />
+      </div>
+
+      <div className={styles.calc}>
+        <div className={styles.numbers}>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(num => (
+            <button
+              key={num}
+              type="button"
+              onClick={inputAdd}
+              className={styles.mathBtns}
+            >
+              {num}
+            </button>
+          ))}
+
+          <button
+            className={styles.mathBtns}
+            style={{ background: "green" }}
+            onClick={() => handleOperation("+")}
+            type="button"
+          >
+            +
+          </button>
+          <button
+            className={styles.mathBtns}
+            style={{ background: "green" }}
+            onClick={() => handleOperation("-")}
+            type="button"
+          >
+            -
+          </button>
+          <button
+            className={styles.mathBtns}
+            style={{ background: "green" }}
+            onClick={() => handleOperation("/")}
+            type="button"
+          >
+            /
+          </button>
+          <button
+            className={styles.mathBtns}
+            style={{ background: "green" }}
+            onClick={() => handleOperation("*")}
+            type="button"
+          >
+            *
+          </button>
+          <button
+            className={styles.mathBtns}
+            style={{ background: "green" }}
+            onClick={handleEqual}
+            type="button"
+          >
+            =
+          </button>
+
+          <button
+            className={styles.mathBtns}
+            style={{ background: "tomato" }}
+            onClick={clearInput}
+            type="button"
+          >
+            C
+          </button>
+        </div>
+      </div>
+
+      <button type="submit">{language.back}</button>
+    </form>
+  );
+}

@@ -1,9 +1,20 @@
-.modalForm {
+.modalFormHistorySetting {
+    h5 {
+        color: #dfd9be
+    }
+
+    h5::first-letter {
+        text-transform: uppercase;
+    }
+
+    margin-top: 181px;
+    margin: 20vh 1vw 0vh 1vw;
+    padding: 7vh 0 7vh 0;
     position: absolute;
-    padding-top: 30%;
+
     background: #3a4346;
     width: 100%;
-    height: max-content;
+
     min-height: 451px;
     z-index: 1;
     opacity: 0.96;
@@ -13,6 +24,8 @@
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
+    flex-wrap: nowrap;
+
 
     select,
     label {
@@ -26,7 +39,7 @@
         background-color: #dfd9be;
     }
 
-    .backBtnSelectLanguage {
+    .backBtnHistotySetting {
         width: 200px;
         margin-top: 30px;
     }
