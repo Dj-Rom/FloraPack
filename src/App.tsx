@@ -1,94 +1,99 @@
+import { useEffect, useState } from 'react';
 import './App.css';
-import { type InitialPackList } from './components/FormForListPackaging.tsx';
-import { useSelector, useDispatch } from 'react-redux';
+import PackagingList from './components/PackagingList.tsx';
+import FormForListPackaging from './components/FormForListPackaging.tsx';
+import { type InitialList } from './components/FormForListPackaging.tsx';
+import IndexedDBManager from './classes/indexedDB.tsx';
+import ModalWindowForNameCompany from './components/ModalWindowForNameCompany.tsx';
+import { useSelector } from 'react-redux';
 import { RootState } from './redux/store.tsx';
 import PrimarySearchAppBar from './components/Navi.tsx';
 import SelectLanguage from './components/SelectLanguage.tsx';
-import SelectPackList from './components/SelectPackList.tsx';
-import { Route, Routes } from 'react-router-dom';
-import MainPage from './pages/MainPage.tsx';
-import PackInformationPage from './pages/PackInformationPage.tsx';
-import { Alert, Snackbar } from '@mui/material';
-import { clearAlert } from './redux/slices/alertSlice.tsx';
-import SelectWhatsApp from './components/SelectWhatsApp.tsx';
-import { useEffect } from 'react';
-import HistorySettingsPanel from './components/HistorySettingsPanel.tsx';
-
+import SelectPackList from './components/SelectPackList.tsx'
 export interface PackagingListInterface {
   id: number;
   title: Date;
-  nameCompany: string;
-  description: InitialPackList;
+  nameCompany: string | any;
+  description: InitialList;
 }
 
+
 function App() {
-  const language = useSelector((state: RootState) => state.settingsLanguage);
-  const {
-    isSelectLanguage,
-    isSelectPackList,
-    isSelectWhatsAppMessage,
-    isSelectActivityHistoty
-  } = useSelector((state: RootState) => state.navi);
-
-  const alert = useSelector((state: RootState) => state.alert);
-  const dispatch = useDispatch();
-  const open = Boolean(alert.message);
-
-  const handleClose = () => {
-    dispatch(clearAlert());
+  const isSelectLanguage = useSelector((state: RootState) => state.navi.isSelectLanguage)
+  const isSelectPackList = useSelector((state: RootState) => state.navi.isSelectPackList)
+  const indexedDB = new IndexedDBManager();
+  const [packagingLists, setPackagingLists] = useState<PackagingListInterface[]>([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [nameCompanyForList, setNameCompanyForList] = useState('');
+  const [tempListData, setTempListData] = useState<InitialList | null>(null);
+  const fetchAllItems = async () => {
+    const items = await indexedDB.getAllItems();
+    setPackagingLists(items);
   };
 
-
-
   useEffect(() => {
+    fetchAllItems();
+  }, [nameCompanyForList]);
 
-    document.documentElement.lang = language.language;
-  }, [language]);
+  const handleNameCompanyFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const input = form.elements.namedItem('nameCompany') as HTMLInputElement;
 
-  useEffect(() => {
+    if (input && input.value.length > 1 && tempListData) {
+      const newList: PackagingListInterface = {
+        id: Math.random(),
+        title: new Date(),
+        nameCompany: input.value,
+        description: tempListData,
+      };
+      // if (Object.values(tempListData).filter(item => item == 0).length > 0) console.log("Packaging list cannot be empty")
 
-    const spinner = document.getElementById('spinner');
-    if (spinner) {
-      spinner.style.display = 'none';
+      await indexedDB.saveItems([newList]);
+      await fetchAllItems();
+      setTempListData(null);
+      setNameCompanyForList('');
+      setIsModalVisible(false);
     }
+  };
 
-  }, []);
+  const handleAddPackagingList = (list: InitialList) => {
+    setTempListData(list);
+    setIsModalVisible(true);
+  };
+
+  const handleDeleteGoal = async (id: number) => {
+    await indexedDB.deleteItem(id);
+    await fetchAllItems();
+  };
 
   return (
     <>
-      {alert?.message && alert?.type && (
-        <Snackbar
-          open={open}
-          autoHideDuration={3000}
-          onClose={handleClose}
-          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        >
-          <Alert onClose={handleClose} severity={alert.type as any} sx={{ width: '100%' }}>
-            {alert.message}
-          </Alert>
-        </Snackbar>
-      )}
-
       <header>
         <PrimarySearchAppBar />
-        {isSelectLanguage && <SelectLanguage />}
-        {isSelectPackList && <SelectPackList />}
-        {isSelectWhatsAppMessage && <SelectWhatsApp />}
-        {isSelectActivityHistoty && <HistorySettingsPanel />}
+        {isSelectLanguage ? <SelectLanguage /> : ''}
+        {isSelectPackList ? <SelectPackList /> : ''}
       </header>
-
       <main>
-        <Routes>
-          <Route path="FloraPack/" element={<MainPage />} />
-          <Route path="FloraPack/information" element={<PackInformationPage />} />
-        </Routes>
+        {isModalVisible ? (
+          <ModalWindowForNameCompany onSubmit={handleNameCompanyFormSubmit} />
+        ) : (
+          <>
+            <FormForListPackaging onAddList={handleAddPackagingList} />
+            <PackagingList
+              onDeleteList={handleDeleteGoal}
+              packagingLists={packagingLists}
+            />
+          </>
+        )}
       </main>
-
       <footer>
         <p>&copy; Dj-Rom, Union Europe 2025</p>
       </footer>
     </>
+
   );
 }
+
 
 export default App;
