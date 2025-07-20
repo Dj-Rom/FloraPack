@@ -12,7 +12,6 @@ export interface InitialPackList {
 }
 
 export default function FormForListPackaging({ onAddList }: any) {
-
   const [itemName, setItemName] = useState('');
   const [isBtnChangeWithMath, setIsBtnChangeWithMath] = useState(false);
   const [isButtonShowMore, setIsButtonShowMore] = useState(false);
@@ -55,13 +54,11 @@ export default function FormForListPackaging({ onAddList }: any) {
     dispatch(setPackItem({ name, value }));
     dispatch(addLog({ message: { name, prevalue: "", value, sign: '' }, datetime: Date.now() }));
   }
-
   function handleChangeWithMath() {
 
 
     setIsBtnChangeWithMath(false);
   }
-
   function handleChangeWithButton(event: React.MouseEvent<HTMLButtonElement>, sign: string) {
     event.preventDefault();
     const parent = (event.target as HTMLElement).parentElement;

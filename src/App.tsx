@@ -1,6 +1,6 @@
 import './App.css';
 import { type InitialPackList } from './components/FormForListPackaging.tsx';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from './redux/store.tsx';
 import PrimarySearchAppBar from './components/Navi.tsx';
 import SelectLanguage from './components/SelectLanguage.tsx';
@@ -10,14 +10,9 @@ import MainPage from './pages/MainPage.tsx';
 import PackInformationPage from './pages/PackInformationPage.tsx';
 import { Alert, Snackbar } from '@mui/material';
 import { clearAlert } from './redux/slices/alertSlice.tsx';
-import { useDispatch } from 'react-redux';
-
 import SelectWhatsApp from './components/SelectWhatsApp.tsx';
 import { useEffect } from 'react';
 import HistorySettingsPanel from './components/HistorySettingsPanel.tsx';
-
-
-
 
 export interface PackagingListInterface {
   id: number;
@@ -27,24 +22,40 @@ export interface PackagingListInterface {
 }
 
 function App() {
+  const language = useSelector((state: RootState) => state.settingsLanguage);
+  const {
+    isSelectLanguage,
+    isSelectPackList,
+    isSelectWhatsAppMessage,
+    isSelectActivityHistoty
+  } = useSelector((state: RootState) => state.navi);
 
-
-
-  const language = useSelector((state: RootState) => state.settingsLanguage)
-  const { isSelectLanguage, isSelectPackList, isSelectWhatsAppMessage, isSelectActivityHistoty } = useSelector((state: RootState) => state.navi);
-  useEffect(() => {
-    document.documentElement.lang = language.language;
-  }, [language]);
-
-  const alert = useSelector((state: RootState) => state.alert)
-  const dispatch = useDispatch()
+  const alert = useSelector((state: RootState) => state.alert);
+  const dispatch = useDispatch();
   const open = Boolean(alert.message);
+
   const handleClose = () => {
     dispatch(clearAlert());
   };
+
+
+
+  useEffect(() => {
+
+    document.documentElement.lang = language.language;
+  }, [language]);
+
+  useEffect(() => {
+
+    const spinner = document.getElementById('spinner');
+    if (spinner) {
+      spinner.style.display = 'none';
+    }
+
+  }, []);
+
   return (
     <>
-
       {alert?.message && alert?.type && (
         <Snackbar
           open={open}
