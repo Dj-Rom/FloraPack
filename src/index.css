@@ -19,7 +19,7 @@ html {
 
 
   li {
-    border: 1px solid #f7e596;
+    text-decoration: underline  1px solid #f7e596;
   }
 }
 

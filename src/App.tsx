@@ -41,7 +41,6 @@ function App() {
 
 
   useEffect(() => {
-
     document.documentElement.lang = language.language;
   }, [language]);
 

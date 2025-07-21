@@ -10,7 +10,7 @@ label {
   margin-top: 60px;
 }
 
-input {
+input, .formInput {
   font: inherit;
   width: 100%;
   padding: 0.5rem;
@@ -100,7 +100,7 @@ li button:hover {
   color: #f9a73b;
 }
 
-form input,
+form input,.formInput,
 form button {
   padding: 0;
   margin: 0 2px;

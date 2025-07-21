@@ -6,6 +6,7 @@ export type LanguageLabels = {
   delete: string;
   back: string;
   enterListName: string;
+  enterNewValue: string; // ✅ New label
   description: string;
   company: string;
   date: string;
@@ -20,10 +21,10 @@ export type LanguageLabels = {
   listEmptyWarning: string;
   history: string;
   reset: string;
-  settings: string;
   clear: string;
+  settings: string;
   limit: string;
-  cannotBeEmpty: string
+  cannotBeEmpty: string;
 };
 
 type SettingLanguageSliceState = {
@@ -39,6 +40,7 @@ export const allLanguages: SettingLanguageSliceState = {
     delete: 'usuń',
     back: 'wstecz',
     enterListName: 'wpisz tutaj nazwę listy',
+    enterNewValue: 'wpisz nową wartość',
     description: 'opis',
     company: 'firma',
     date: 'data',
@@ -66,6 +68,7 @@ export const allLanguages: SettingLanguageSliceState = {
     delete: 'löschen',
     back: 'zurück',
     enterListName: 'listenname hier eingeben',
+    enterNewValue: 'neuen Wert eingeben',
     description: 'beschreibung',
     company: 'firma',
     date: 'datum',
@@ -93,6 +96,7 @@ export const allLanguages: SettingLanguageSliceState = {
     delete: 'delete',
     back: 'back',
     enterListName: 'enter list name here',
+    enterNewValue: 'enter new value',
     description: 'description',
     company: 'company',
     date: 'date',
@@ -120,6 +124,7 @@ export const allLanguages: SettingLanguageSliceState = {
     delete: 'удалить',
     back: 'назад',
     enterListName: 'введите название списка',
+    enterNewValue: 'введите новое значение',
     description: 'описание',
     company: 'компания',
     date: 'дата',
@@ -147,6 +152,7 @@ export const allLanguages: SettingLanguageSliceState = {
     delete: 'verwijderen',
     back: 'terug',
     enterListName: 'voer hier de naam van de lijst in',
+    enterNewValue: 'voer nieuwe waarde in',
     description: 'beschrijving',
     company: 'bedrijf',
     date: 'datum',
@@ -174,6 +180,7 @@ export const allLanguages: SettingLanguageSliceState = {
     delete: 'видалити',
     back: 'назад',
     enterListName: 'введіть назву списку тут',
+    enterNewValue: 'введіть нове значення',
     description: 'опис',
     company: 'компанія',
     date: 'дата',

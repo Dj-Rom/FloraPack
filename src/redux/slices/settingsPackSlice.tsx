@@ -74,7 +74,7 @@ export const settingsPackSlice = createSlice({
       });
       saveToStorage(state, LOCAL_STORAGE_KEY);
     },
-    settingsFormAllItemsIsUnshow: (state) => {
+    settingsFormAllItemsIsUnshod: (state) => {
       const saved = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CURRENT_LIST) || '{}')?.packList;
       Object.keys(state).forEach((key) => {
         state[key] = saved?.[key] ?? defaultState[key];
@@ -89,7 +89,7 @@ export const {
   settingsPackDeletePackItem,
   settingsViewFormChangeItem,
   settingsFormAllItemsIsShow,
-  settingsFormAllItemsIsUnshow,
+  settingsFormAllItemsIsUnshod,
 } = settingsPackSlice.actions;
 
 export default settingsPackSlice.reducer;

@@ -13,7 +13,7 @@ export default function SelectLanguage() {
 
 
     const isLanguageCode = (value: string): value is LanguageCode => {
-      return ['pl', 'de', 'en', 'ru', 'nl', 'uk'].includes(value);
+      return ['pl', 'de', 'en', 'ru', 'nl', 'ua'].includes(value);
     };
     if (isLanguageCode(value)) {
       dispatch(setLanguage(value));

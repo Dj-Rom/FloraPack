@@ -10,6 +10,11 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store.tsx';
 import ShowLogs from '../components/ShowLogs.tsx';
+import scrollToId from "../helpers/scrollToId.tsx";
+
+
+
+
 export default function MainPage() {
   const dispatch = useDispatch();
   const language = useSelector((state: RootState) => state.settingsLanguage)
@@ -47,6 +52,8 @@ export default function MainPage() {
       setTempListData(null);
       setNameCompanyForList('');
       setIsModalVisible(false);
+      setTimeout(() => scrollToId((newList.id).toString()), 300);
+
     } else {
       dispatch(setAlert({ type: "error", message: language.cannotBeEmpty }))
     }
