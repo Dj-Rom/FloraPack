@@ -4,9 +4,11 @@ import styles from './../styles/calculatorModal.module.scss';
 import { useState } from "react";
 import { addLog } from "../redux/slices/activityHistorySlice";
 import { setPackItem } from "../redux/slices/packagingListSlice";
+import * as React from "react";
+
 
 interface Props {
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => any;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>, elemName: string) => void;
   elemName: string;
 }
 
@@ -19,11 +21,17 @@ export default function CalculatorModal({ onSubmit, elemName }: Props) {
     return <div>Loading...</div>;
   }
 
+  window.scroll(0,0)
+
   const initialValue = datalist[elemName];
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [result, setResult] = useState<string | number>(initialValue);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [inputField, setInputField] = useState<number | string>(initialValue);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [pendingValue, setPendingValue] = useState<number | null>(null);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [pendingOperation, setPendingOperation] = useState<string | null>(null);
 
   function inputAdd(event: React.MouseEvent<HTMLButtonElement>) {
@@ -120,7 +128,7 @@ export default function CalculatorModal({ onSubmit, elemName }: Props) {
   }
 
   return (
-    <form className="calculatorModal" onSubmit={onSubmit}>
+    <form className="calculatorModal" onSubmit={(event)=>onSubmit(event, elemName)}>
       <div className={styles.calcHeader}>
         <h4>{elemName}</h4>
         <h5>
@@ -207,7 +215,7 @@ export default function CalculatorModal({ onSubmit, elemName }: Props) {
         </div>
       </div>
 
-      <button type="submit">{language.back}</button>
+      <button type="submit">{language.save}</button>
     </form>
   );
 }

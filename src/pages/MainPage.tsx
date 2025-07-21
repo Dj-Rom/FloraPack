@@ -73,6 +73,7 @@ export default function MainPage() {
     await indexedDB.deleteItem(id);
     await fetchAllItems();
   };
+
   return (
     <> {isModalVisible ? (
       <ModalWindowForNameCompany onSubmit={handleNameCompanyFormSubmit} />

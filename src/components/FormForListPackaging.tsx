@@ -34,6 +34,7 @@ export default function FormForListPackaging({ onAddList }: any) {
   function handlePackagingForm(event: FormEvent) {
     event.preventDefault();
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     onAddList(packagingList);
     dispatch(clearAllPackItems());
     dispatch(addLog({
@@ -42,8 +43,11 @@ export default function FormForListPackaging({ onAddList }: any) {
     }));
   }
 
-  function handleChangeWithMath() {
+  function handleChangeWithMath(  event: { preventDefault: () => void; },  elemName:string) {
+    event.preventDefault();
     setIsBtnChangeWithMath(false);
+    console.log(elemName);
+    setTimeout(()=>scrollToId(elemName),40)
   }
 
   function handleChangeWithButton(event: React.MouseEvent<HTMLButtonElement>, sign: string) {
@@ -74,6 +78,7 @@ export default function FormForListPackaging({ onAddList }: any) {
   }
 
   if (isBtnChangeWithMath) {
+ 
     return (
         <CalculatorModal
             onSubmit={handleChangeWithMath}

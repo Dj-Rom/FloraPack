@@ -1,0 +1,19 @@
+.closeButton{
+  position: relative;
+  top: -62px;
+  left: 89%;
+  font-size: 200%;
+  cursor: pointer;
+
+
+}
+
+@media screen and ( max-width: 720px) {
+  .closeButton {
+    position: absolute;
+    top: 0%;
+    left: 88%;
+    font-size: 200%;
+    cursor: pointer;
+  }
+}

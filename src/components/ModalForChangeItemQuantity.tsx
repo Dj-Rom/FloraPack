@@ -4,6 +4,7 @@ import {Dispatch, SetStateAction, useState} from "react";
 import {addLog} from "../redux/slices/activityHistorySlice.tsx";
 import {setPackItem} from "../redux/slices/packagingListSlice.tsx";
 import * as React from "react";
+import scrollToId from "../helpers/scrollToId.tsx";
 
 interface Props {
     itemName: string;
@@ -33,7 +34,8 @@ export default function ModalForChangeItemQuantity({
             datetime: Date.now()
         }));
         dispatch(setPackItem({name: itemName, value:  numericValue}));
-        toogleModalWindow(false); // close modal
+        toogleModalWindow(false);
+        setTimeout(()=>scrollToId(itemName),40)
     }
 
     return (

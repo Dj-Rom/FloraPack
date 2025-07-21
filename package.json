@@ -3,7 +3,7 @@
   "short_name": "FloraPack",
   "display": "standalone",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "theme_color": "#3a4346",
   "type": "module",
   "scripts": {

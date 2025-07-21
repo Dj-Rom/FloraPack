@@ -99,10 +99,19 @@ li button {
 li button:hover {
   color: #f9a73b;
 }
-
-form input,.formInput,
-form button {
+.formInput{
   padding: 6px 0 0 0;
+  margin: 0 2px;
+  min-height: 33px;
+  max-height: 9vw;
+  text-align: center;
+  color: black;
+  font-weight: 900;
+  opacity: 1;
+}
+form input,
+form button {
+  padding: 0;
   margin: 0 2px;
   min-height: 33px;
   max-height: 9vw;

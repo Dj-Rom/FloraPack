@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setIsSelectActivityHistoty, setIsSelectLanguage, setIsSelectPackList, setIsSelectWhatsAppMessage } from '../redux/slices/naviSlice';
 import { useNavigate } from 'react-router-dom';
 import { TbSettings } from "react-icons/tb";
+import styles from "./../styles/navi.module.scss"
 export default function MenuAppBar() {
     const navigator = useNavigate();
     const dispatch = useDispatch();
@@ -41,7 +42,7 @@ export default function MenuAppBar() {
     };
 
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', borderRadius: '94px', alignItems: 'center', width: '100%' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', borderRadius: '94px', alignItems: 'center', width: '99.5vw' }}>
             <AppBar position="static">
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', borderRadius: '4px', backgroundColor: '#3a4346', alignItems: 'center', width: '100%' }}>
                     <IconButton
@@ -81,18 +82,24 @@ export default function MenuAppBar() {
                         open={Boolean(pageMenuAnchorEl)}
                         onClose={handleClose}
                         PaperProps={{
-                            sx: {
+                            sx: {left: "0% !important",
                                 backgroundColor: '#3a4346',
-                                boxShadow: 'none'
+                                boxShadow: 'none',
+
                             }
                         }}
                         MenuListProps={{
                             sx: {
+
                                 paddingRight: 0,
-                                width: '100% !important'
+                                width: '100% !important',
+                                height: "100% !important",
+                                display: 'contents',
                             }
                         }}
+
                     >
+                        <div className={styles.closeButton} onClick={()=>handleClose()}>&#x2716;</div>
                         <MenuItem className="naviSettingBtn" onClick={() => handlePageNavigation('/FloraPack/')}>
                             {language.home}
                         </MenuItem>
@@ -112,17 +119,24 @@ export default function MenuAppBar() {
                         onClose={handleClose}
                         PaperProps={{
                             sx: {
+                              left: '75vw !important',
+
                                 backgroundColor: '#3a4346',
-                                boxShadow: 'none'
+                                boxShadow: 'none',
+
                             }
                         }}
                         MenuListProps={{
                             sx: {
+
                                 paddingRight: 0,
-                                width: '100% !important'
+                                width: '100% !important',
+                                height: "100% !important",
+                                display: 'contents',
                             }
                         }}
                     >
+                        <div className={styles.closeButton} onClick={()=>handleClose()}>&#x2716;</div>
                         <MenuItem
                             className="naviSettingBtn"
                             disabled={isSelectLanguage || isSelectPackList || isSelectActivityHistoty}
