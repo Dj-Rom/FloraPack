@@ -1,26 +1,28 @@
 .modalFormPackList {
 
-    position: absolute;
-    padding: 255px 5px 0 5px;
+    position: fixed;
+    padding: 55px 5px 55px 5px;
     top: 0px;
     background: #3a4346;
     width: 100%;
     max-width: 40rem;
     min-height: 100%;
+    /* padding-top: 325px; */
     height: 100vh;
-    z-index: 1000;
     overflow: auto;
-    opacity: 0.95;
-    display: flex;
+    opacity: 1;
+    display: flex
+;
     align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-direction: column;
+    flex-wrap: nowrap;
     backdrop-filter: blur(6px);
     overflow-x: hidden;
     outline: none;
-    z-index: 1;
+    align-content: flex-start;
     align-content: center;
+    z-index: 1000;
 
     img {
         width: auto;
@@ -28,7 +30,7 @@
 
     select,
     label {
-        margin-top: 20px;
+        margin: 10px;
         width: 200px;
     }
 
@@ -125,6 +127,13 @@ input:checked+.slider:before {
 }
 
 fieldset {
+    margin: 1px auto;
+    border-radius: 5px;
+    border-color: rgb(223, 217, 190);
+    text-align: center;
+    height: 94px;
+    width: 100%;
+    padding: 0;
     legend {
         color: #dfd9be;
     }

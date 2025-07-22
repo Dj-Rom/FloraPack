@@ -5,18 +5,20 @@ import { useState } from "react";
 import { addLog } from "../redux/slices/activityHistorySlice";
 import { setPackItem } from "../redux/slices/packagingListSlice";
 import * as React from "react";
+import {ConfirmDialog} from "./ConfirmDialog.tsx";
 
 
 interface Props {
-  onSubmit: (event: React.FormEvent<HTMLFormElement>, elemName: string) => void;
+  onSubmit: (event: React.FormEvent, elemName: string) => void;
   elemName: string;
 }
 
 export default function CalculatorModal({ onSubmit, elemName }: Props) {
+  const [showConfirm, setShowConfirm] = useState(false);
   const datalist = useSelector((state: RootState) => state.dataPackList);
   const language = useSelector((state: RootState) => state.settingsLanguage);
   const dispatch = useDispatch();
-
+const [isChange, setIsChange] = React.useState(false);
   if (datalist[elemName] === undefined) {
     return <div>Loading...</div>;
   }
@@ -113,7 +115,7 @@ export default function CalculatorModal({ onSubmit, elemName }: Props) {
       }));
 
       dispatch(setPackItem({ name: elemName, value: newValue }));
-
+setIsChange(true);
       setInputField(newValue);
       setPendingValue(null);
       setPendingOperation(null);
@@ -127,8 +129,37 @@ export default function CalculatorModal({ onSubmit, elemName }: Props) {
     setResult(0);
   }
 
+  const handleSubmit = (event: React.FormEvent) => {
+    if (!isChange) {
+      event.preventDefault();
+      setShowConfirm(true);
+      return;
+    }
+    onSubmit(event, elemName);
+  };
+
   return (
-    <form className="calculatorModal" onSubmit={(event)=>onSubmit(event, elemName)}>
+
+<>
+        {showConfirm && (
+            <ConfirmDialog
+                message={language.answerMessageForExitWithoutChange}
+                onConfirm={() => {
+                  setShowConfirm(false);
+                  onSubmit(new Event("submit") as unknown as React.FormEvent, elemName);
+                }}
+                onCancel={() => setShowConfirm(false)}
+            />
+        )}
+
+
+
+
+      <form
+          className="calculatorModal"
+          onSubmit={handleSubmit}
+      >
+
       <div className={styles.calcHeader}>
         <h4>{elemName}</h4>
         <h5>
@@ -215,7 +246,8 @@ export default function CalculatorModal({ onSubmit, elemName }: Props) {
         </div>
       </div>
 
-      <button type="submit">{language.save}</button>
+      <button type="submit">{language.back}</button>
     </form>
+</>
   );
 }

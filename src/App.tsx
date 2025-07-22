@@ -95,7 +95,7 @@ function App() {
       </main>
 
       <footer>
-        <p>&copy; Dj-Rom, Union Europe 2025</p>
+        <p>&copy; Dj-Rom, Union Europe 2025 Version 1.0.2</p>
       </footer>
     </>
   );

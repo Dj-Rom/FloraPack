@@ -165,7 +165,7 @@ export default function MenuAppBar() {
                                 handleClose();
                             }}
                         >
-                            {language.packagingList}
+                            {language.packingList}
                         </MenuItem>
                         <MenuItem
                             className="naviSettingBtn"

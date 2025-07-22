@@ -1,33 +1,35 @@
 .modalForm {
     position: absolute;
-    padding-top: 30%;
     background: #3a4346;
     width: 100%;
-    height: max-content;
+    height: 100vh !important;
     min-height: 451px;
-    z-index: 1;
-    opacity: 0.96;
-    display: flex;
+    z-index: 11111;
+    top: -1px;
+    padding-top: 109px;
+    opacity: 1;
+    display: flex
+;
     align-items: center;
     align-content: center;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     overflow: hidden;
 
-    select,
-    label {
-        margin-top: 20px;
-        width: 200px;
-    }
+select,
+label {
+    margin-top: 20px;
+    width: 200px;
+}
 
-    select {
-        color: black;
-        border-radius: 0px;
-        background-color: #dfd9be;
-    }
+select {
+    color: black;
+    border-radius: 0px;
+    background-color: #dfd9be;
+}
 
-    .backBtnSelectLanguage {
-        width: 200px;
-        margin-top: 30px;
-    }
+.backBtnSelectLanguage {
+    width: 200px;
+    margin-top: 30px;
+}
 }
