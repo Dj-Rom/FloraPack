@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-type SettingPackSliceState = {
+type SettingPackState = {
   [key: string]: boolean;
 };
 
-const LOCAL_STORAGE_KEY = 'FloraPackSettingsPackagingList';
-const LOCAL_STORAGE_KEY_CURRENT_LIST = 'FloraPackSettingsPackagingListCurrentList';
-const defaultState: SettingPackSliceState = {
+const LOCAL_STORAGE_KEY = 'FloraPackSettingsPackagingList1';
+const LOCAL_STORAGE_SNAPSHOT_KEY = 'FloraPackSettingsPackagingListCurrentList1';
+
+const defaultState: SettingPackState = {
   'KK': true,
   'KK-SH': true,
   'CC': true,
@@ -30,66 +31,75 @@ const defaultState: SettingPackSliceState = {
   'TRAAY': false,
 };
 
-if (!localStorage.getItem(LOCAL_STORAGE_KEY)) {
-  localStorage.setItem(
-    LOCAL_STORAGE_KEY,
-    JSON.stringify({ packList: { ...defaultState } })
-  );
-}
-
-
-const savedSettings = localStorage.getItem(LOCAL_STORAGE_KEY);
-const savedPackList = savedSettings ? JSON.parse(savedSettings).packList : null;
-
-const initialState: SettingPackSliceState = savedPackList || defaultState;
-
-const saveToStorage = (state: SettingPackSliceState, LOCAL_STORAGE_KEY: string) => {
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify({ packList: { ...state } }));
+// Helpers
+const getSavedState = (key: string): SettingPackState | null => {
+  try {
+    const saved = localStorage.getItem(key);
+    return saved ? JSON.parse(saved).packList : null;
+  } catch {
+    return null;
+  }
 };
 
-export const settingsPackSlice = createSlice({
+const saveState = (key: string, state: SettingPackState) => {
+  localStorage.setItem(key, JSON.stringify({ packList: { ...state } }));
+};
+
+// Initialize localStorage if not set
+if (!localStorage.getItem(LOCAL_STORAGE_KEY)) {
+  saveState(LOCAL_STORAGE_KEY, defaultState);
+}
+
+const initialState: SettingPackState =
+    getSavedState(LOCAL_STORAGE_KEY) || { ...defaultState };
+
+// Slice
+const settingsPackSlice = createSlice({
   name: 'settingsPack',
   initialState,
   reducers: {
-    settingsPackAddNewPackItem: (state, action: PayloadAction<string>) => {
+    addPackItem: (state, action: PayloadAction<string>) => {
       state[action.payload] = false;
-      saveToStorage(state, LOCAL_STORAGE_KEY);
+      saveState(LOCAL_STORAGE_KEY, state);
     },
-    settingsPackDeletePackItem: (state, action: PayloadAction<string>) => {
+    deletePackItem: (state, action: PayloadAction<string>) => {
       delete state[action.payload];
-      saveToStorage(state, LOCAL_STORAGE_KEY);
+      saveState(LOCAL_STORAGE_KEY, state);
     },
-    settingsViewFormChangeItem: (state, action: PayloadAction<string>) => {
+    togglePackItemVisibility: (state, action: PayloadAction<string>) => {
       const key = action.payload;
       if (key in state) {
         state[key] = !state[key];
-        saveToStorage(state, LOCAL_STORAGE_KEY);
-        saveToStorage(state, LOCAL_STORAGE_KEY_CURRENT_LIST);
+        saveState(LOCAL_STORAGE_KEY, state);
+        saveState(LOCAL_STORAGE_SNAPSHOT_KEY, state);
       }
     },
-    settingsFormAllItemsIsShow: (state) => {
-      saveToStorage(state, LOCAL_STORAGE_KEY_CURRENT_LIST)
+    showAllPackItems: (state) => {
+      // Save snapshot before changing
+      saveState(LOCAL_STORAGE_SNAPSHOT_KEY, state);
       Object.keys(state).forEach((key) => {
         state[key] = true;
       });
-      saveToStorage(state, LOCAL_STORAGE_KEY);
+      saveState(LOCAL_STORAGE_KEY, state);
     },
-    settingsFormAllItemsIsUnshod: (state) => {
-      const saved = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_CURRENT_LIST) || '{}')?.packList;
+    restorePreviousVisibility: (state) => {
+      const snapshot = getSavedState(LOCAL_STORAGE_SNAPSHOT_KEY);
       Object.keys(state).forEach((key) => {
-        state[key] = saved?.[key] ?? defaultState[key];
+        state[key] = snapshot?.[key] ?? defaultState[key];
       });
-      saveToStorage(state, LOCAL_STORAGE_KEY);
+      saveState(LOCAL_STORAGE_KEY, state);
     },
   },
 });
 
+// Actions
 export const {
-  settingsPackAddNewPackItem,
-  settingsPackDeletePackItem,
-  settingsViewFormChangeItem,
-  settingsFormAllItemsIsShow,
-  settingsFormAllItemsIsUnshod,
+  addPackItem,
+  deletePackItem,
+  togglePackItemVisibility,
+  showAllPackItems,
+  restorePreviousVisibility,
 } = settingsPackSlice.actions;
 
+// Reducer
 export default settingsPackSlice.reducer;

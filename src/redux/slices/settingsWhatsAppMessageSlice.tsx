@@ -7,7 +7,7 @@ export type SettingWhatsAppMessage = {
 
 type SettingKey = keyof SettingWhatsAppMessage;
 
-const LOCAL_STORAGE_KEY = 'settingWhatsApp';
+const LOCAL_STORAGE_KEY = 'settingWhatsApp1';
 
 const savedState = localStorage.getItem(LOCAL_STORAGE_KEY);
 const initialState: SettingWhatsAppMessage = savedState

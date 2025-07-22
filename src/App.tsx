@@ -14,6 +14,9 @@ import SelectWhatsApp from './components/SelectWhatsApp.tsx';
 import { useEffect } from 'react';
 import HistorySettingsPanel from './components/HistorySettingsPanel.tsx';
 
+
+
+
 export interface PackagingListInterface {
   id: number;
   title: Date;
@@ -21,7 +24,11 @@ export interface PackagingListInterface {
   description: InitialPackList;
 }
 
+import { useServiceWorkerUpdate } from "./useServiceWorkerUpdate" ;
+
 function App() {
+  const { updateServiceWorker, isUpdateAvailable } = useServiceWorkerUpdate();
+
   const language = useSelector((state: RootState) => state.settingsLanguage);
   const {
     isSelectLanguage,
@@ -54,7 +61,11 @@ function App() {
   }, []);
 
   return (
-    <>
+    <>{isUpdateAvailable && (
+        <div className="update-notification">
+          <button onClick={updateServiceWorker}>Обновить приложение</button>
+        </div>
+    )}
       {alert?.message && alert?.type && (
         <Snackbar
           open={open}

@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initialPackList } from '../../data/initialPackList';
 import { InitialPackList } from '../../components/FormForListPackaging';
 
-const LOCAL_STORAGE_KEY = 'dataPackLists';
+const LOCAL_STORAGE_KEY = 'dataPackLists1';
 
 const savedState = localStorage.getItem(LOCAL_STORAGE_KEY);
 const initialState: InitialPackList = savedState

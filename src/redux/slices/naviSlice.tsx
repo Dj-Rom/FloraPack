@@ -7,7 +7,7 @@ type SettingPackSliceState = {
     isSelectActivityHistoty: boolean;
 };
 
-const LOCAL_STORAGE_KEY = 'FloraPackSettings';
+const LOCAL_STORAGE_KEY = 'FloraPackSettings1';
 
 const savedState = localStorage.getItem(LOCAL_STORAGE_KEY);
 const initialState: SettingPackSliceState = savedState

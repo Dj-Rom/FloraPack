@@ -3,7 +3,7 @@ import { allLanguages, LanguageLabels } from '../../data/languages';
 
 export type LanguageCode = 'pl' | 'en' | 'ru' | 'nl' | 'ua' | 'de';
 
-const LOCAL_STORAGE_KEY = 'FloraPackSettingsLanguage';
+const LOCAL_STORAGE_KEY = 'FloraPackSettingsLanguage1';
 
 const langMap: Record<LanguageCode, keyof typeof allLanguages> = {
   pl: 'polish',

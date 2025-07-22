@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import styles from './../styles/selectPackList.module.scss';
 import { setIsSelectPackList } from "../redux/slices/naviSlice.tsx";
-import { settingsPackDeletePackItem, settingsViewFormChangeItem } from "../redux/slices/settingsPackSlice.tsx";
+import { deletePackItem,  togglePackItemVisibility } from "../redux/slices/settingsPackSlice.tsx";
 import logoAddNewItem from './../assets/icons8-add-50.png'
 import ModalFormForAddToPackList from './ModalFormForAddToPackList.tsx'
 import { setIsModalWindows } from "../redux/slices/modalWindowsSlice.tsx";
@@ -12,7 +12,7 @@ export default function SelectPackList() {
   const language = useSelector((state: RootState) => state.settingsLanguage);
   const isAddNewPackName = useSelector((state: RootState) => state.modalWindows).isModalFormForAddNewName
   const handlePackListChange = (key: string) => {
-    dispatch(settingsViewFormChangeItem(key));
+    dispatch( togglePackItemVisibility(key));
   };
 
   return (
@@ -31,7 +31,7 @@ export default function SelectPackList() {
                 margin: "1px auto",
               }}
             >
-              <button className={styles.deleteBtnSelectPack} onClick={() => { dispatch(settingsPackDeletePackItem(key)) }} title={language.delete} type="button">X</button>
+              <button className={styles.deleteBtnSelectPack} onClick={() => { dispatch(deletePackItem(key)) }} title={language.delete} type="button">X</button>
               <label className={styles.switch}>
                 <input
                   type="checkbox"

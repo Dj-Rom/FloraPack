@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import { addNewPackName } from '../redux/slices/packagingListSlice';
 import { setIsModalWindows } from '../redux/slices/modalWindowsSlice';
-import { settingsPackAddNewPackItem } from '../redux/slices/settingsPackSlice';
+
 import { setAlert } from '../redux/slices/alertSlice';
+import {addPackItem} from "../redux/slices/settingsPackSlice.tsx";
 
 export default function ModalFormForAddToPackList() {
     const language = useSelector((state: RootState) => state.settingsLanguage);
@@ -15,7 +16,7 @@ export default function ModalFormForAddToPackList() {
         const inputValue = (form.elements.namedItem("namePack") as HTMLInputElement)?.value;
 
         try {
-            dispatch(settingsPackAddNewPackItem(inputValue));
+            dispatch(addPackItem(inputValue));
             dispatch(addNewPackName(inputValue));
             dispatch(setIsModalWindows('isModalFormForAddNewName'));
             dispatch(setAlert({ type: 'success', message: 'Added successfully!' }));

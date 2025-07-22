@@ -12,7 +12,8 @@ import styles from "./../styles/packagingForm.module.scss";
 import { BsFillCalculatorFill } from "react-icons/bs";
 import ModalForChangeItemQuantity from "./ModalForChangeItemQuantity.tsx";
 import {setShowButton} from "../redux/slices/FormForListPackagingSlice.tsx";
-import {settingsFormAllItemsIsShow, settingsFormAllItemsIsUnshod} from "../redux/slices/settingsPackSlice.tsx";
+import {showAllPackItems,
+  restorePreviousVisibility} from "../redux/slices/settingsPackSlice.tsx";
 import scrollToId from "../helpers/scrollToId.tsx";
 
 export interface InitialPackList {
@@ -146,7 +147,7 @@ export default function FormForListPackaging({ onAddList }: any) {
                 onClick={() => {
                   scrollToId("root");
                   dispatch(setShowButton());
-                  dispatch(settingsFormAllItemsIsUnshod());
+                  dispatch(restorePreviousVisibility());
                 }}
             >
               {language.showLess}
@@ -158,7 +159,7 @@ export default function FormForListPackaging({ onAddList }: any) {
                 onClick={() => {
                   scrollToId("root");
                   dispatch(setShowButton());
-                  dispatch(settingsFormAllItemsIsShow());
+                  dispatch(showAllPackItems());
                 }}>
 
               {language.showMore}

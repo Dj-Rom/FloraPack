@@ -15,7 +15,7 @@ type ActivityHistoryState = {
     history: DataLog[];
 };
 
-const LOCAL_STORAGE_KEY = 'FlorapackActiveHistory';
+const LOCAL_STORAGE_KEY = 'FlorapackActiveHistory1';
 
 const loadInitialState = (): ActivityHistoryState => {
     const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
